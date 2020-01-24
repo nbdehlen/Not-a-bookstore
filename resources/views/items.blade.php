@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('head')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-@endsection
-
 @section('content')
 
 <input type="text" id="search" name="search"> <br/>
@@ -36,28 +32,8 @@
           @endforeach 
     </tbody> 
 </table>
+@endsection
 
-<script>
-$('#search').on('keyup',function(){
-    /* "this" refers to the value in #search  */
-    var value = $(this).val();
-
-    $.ajax({
-        type: 'GET',
-        url: '{{ url("items/search") }}',
-        data: {
-            search: value,
-        },
-
-        success:function(data) {
-            $('#initial_table').hide();
-            $('#ajax').html(data);
-        },
-        error:function(jqXHR, textStatus, errorThrown) {
-            console.log("AJAX error: " + textStatus + " : " + errorThrown);
-        },
-    });
-});
-</script>
-
+@section('jquery')
+<script src="{{URL::asset('js/jquery.js')}}"></script>
 @endsection
