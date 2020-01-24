@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Item;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
-        //dd($items);
-        return view('items', ['items' => $items]);
+        $items = Item::get();
+        return view('items', compact('items'));
+
     }
 
     /**
@@ -83,5 +84,31 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+    }
+
+    /*
+    Dynamic search. If the request is ajax, fetch rows from table 'items' where 'name' or 'type' 
+    match the ajax search value. Loop over matching rows and return.
+    */
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = "";
+            $items = DB::table('items')->where('name', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
+
+            if ($items) {
+                foreach ($items as $key => $item) {
+                    $output .= '<tr>' .
+                        '<td>' . $item->name . '</td>' .
+                        '<td>' . $item->description . '</td>' .
+                        '<td>' . $item->type . '</td>' .
+                        '<td>' . $item->price . '</td>' .
+                        '<td>' . $item->quantity . '</td>' .
+                        '</tr>';
+                }
+                return ($output);
+            }
+        }
     }
 }
