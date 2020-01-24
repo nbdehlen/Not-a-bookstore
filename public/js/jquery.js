@@ -1,4 +1,5 @@
-$('#search').on('keyup',function(){
+$(document).ready(function(){
+$('#search').on('keyup', _.debounce(function(e){
     // "this" refers to the value in #search  
     var value = $(this).val();
 
@@ -16,5 +17,6 @@ $('#search').on('keyup',function(){
         error:function(jqXHR, textStatus, errorThrown) {
             console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);
         },
-    });
+    })
+}, 200));
 });
