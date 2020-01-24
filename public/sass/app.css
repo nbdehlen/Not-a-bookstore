@@ -1,0 +1,10 @@
+html,
+body {
+  height: 100%;
+}
+
+.notavailable {
+  background-color: #9c9c9c;
+  cursor: not-allowed;
+}
+/*# sourceMappingURL=app.css.map */
