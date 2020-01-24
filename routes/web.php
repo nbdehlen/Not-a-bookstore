@@ -12,13 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
 
-/*Route::get('/items', 'itemController@index');  {
-    return view('items');
-};*/
+Route::get('/items/search', 'ItemController@search');
 
-Route::resources([
-    'items' => 'ItemController'
-]);
+Route::get('/items', 'ItemController@index');  {
+    return view('items');
+};
