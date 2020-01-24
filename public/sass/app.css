@@ -7,4 +7,20 @@ body {
   background-color: #9c9c9c;
   cursor: not-allowed;
 }
+
+.splitter {
+  border: 5px solid;
+}
+
+.h-90 {
+  height: 90%;
+}
+
+.h-50-px {
+  height: 50px;
+}
+
+.h-75-px {
+  height: 75px;
+}
 /*# sourceMappingURL=app.css.map */

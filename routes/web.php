@@ -20,5 +20,7 @@ Route::get('/', function () {
 };*/
 
 Route::resources([
-    'items' => 'ItemController'
+    'items' => 'ItemController',
+    'shop' => 'ShopController'
 ]);
+
