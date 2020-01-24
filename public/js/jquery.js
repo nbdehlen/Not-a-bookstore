@@ -18,5 +18,5 @@ $('#search').on('keyup', _.debounce(function(e){
             console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);
         },
     })
-}, 200));
+}, 50));
 });
