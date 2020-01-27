@@ -17,60 +17,22 @@
                     <button class="btn">Search</button>
                 </div>
             </div>
-            <div class="row h-75-px">
-                <div class="col-auto">
-                    <img src="{{asset('images/potion.gif')}}" alt="..." class=" h-75-px">
-                </div>
-                <div class="col">
-                    <h2 class="h6">Name</h2>
-                    <p>Desc...<br> 8/100</p>
-                </div>
-                <div class="col-3 ">
-                    <p>500$</p>
-
-
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                        </div>
-                        <input type="text" class="form-control" placeholder="0" aria-label="" aria-describedby="basic-addon1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                        </div>
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">Add</button>
-                        </div>
+            <div class="row">
+                @foreach ($items as $item)
+                    <div class="col-12">
+                        @component('npc_item', ['item' => $item])@endcomponent
                     </div>
-
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="col-6 splitter align-content-between flex-wrap d-flex p-0">
             <div class="row flex-grow-1 h-50-px align-items-center">
-                <div class="col-auto">
-                    <img src="{{asset('images/potion.gif')}}" alt="..." class="h-50-px">
-                </div>
-                <div class="col">
-                    <h2 class="h6 mb-0">Name</h2>
-                </div>
-                <div class="col-1 ">
-                    <p class="mb-0">500$</p>
-                </div>
-                <div class="col-4 ">
-
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                        </div>
-                        <input type="text" class="form-control" placeholder="0" aria-label="" aria-describedby="basic-addon1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                        </div>
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">Remove</button>
-                        </div>
-                    </div>
-
+                <div class="col-12">
+                    {{-- 
+                        Placeholder cart item
+                        This template should probably be made with javascript or be retrieved with an API call 
+                    --}}
+                    @component('cart_item', ['item' => $items[0]])@endcomponent
                 </div>
             </div>
             <div class="row mx-auto">

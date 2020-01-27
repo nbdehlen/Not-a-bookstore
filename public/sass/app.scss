@@ -1,4 +1,8 @@
 //
-@import 'components/_site';
-@import 'components/_landingpage';
-@import 'components/_shop';
+@import "components/_site";
+@import "components/_landingpage";
+
+// Shop
+@import "components/_npc-item";
+@import "components/_cart-item";
+@import "components/_shop";
