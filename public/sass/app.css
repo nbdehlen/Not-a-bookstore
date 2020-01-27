@@ -1,15 +1,23 @@
 html,
 body {
   height: 100%;
+  background-image: url("/images/wallpaper.png");
+  background-size: cover;
 }
 
 .notavailable {
   background-color: #9c9c9c;
   cursor: not-allowed;
+  -webkit-filter: grayscale(0.9);
+          filter: grayscale(0.9);
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
 }
 
 .npc-item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #333;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #c2c2c2;
 }
 
 .npc-item .image {
@@ -36,7 +44,7 @@ body {
   padding-left: 0;
   padding-right: 0;
   border-radius: 0 !important;
-  border: 1px solid #ccc !important;
+  border: 1px solid #333 !important;
 }
 
 .npc-item .btn-action {
@@ -44,12 +52,13 @@ body {
   text-align: center;
   padding-left: 0;
   padding-right: 0;
-  border-radius: 0 !important;
-  border: 1px solid #ddd !important;
+  border: 1px solid #333 !important;
 }
 
 .cart-item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #333;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #c2c2c2;
 }
 
 .cart-item .image {
@@ -76,7 +85,7 @@ body {
   padding-left: 0;
   padding-right: 0;
   border-radius: 0 !important;
-  border: 1px solid #ccc !important;
+  border: 1px solid #333 !important;
 }
 
 .cart-item .btn-action {
@@ -84,12 +93,11 @@ body {
   text-align: center;
   padding-left: 0;
   padding-right: 0;
-  border-radius: 0 !important;
-  border: 1px solid #ddd !important;
+  border: 1px solid #333 !important;
 }
 
 .splitter {
-  border: 5px solid;
+  border: 5px solid transparent;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -104,5 +112,31 @@ body {
 
 .h-75-px {
   height: 75px;
+}
+
+.shop-bg {
+  background-image: url("/images/store-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-height: 866px !important;
+  overflow-y: scroll;
+}
+
+.btn-texture-red {
+  background-image: url("/images/btn-texture-red.png");
+  color: white;
+}
+
+.btn-texture-blue {
+  background-image: url("/images/btn-texture-blue.png");
+  color: white;
+}
+
+.btn-texture-gray {
+  background-image: url("/images/btn-texture-blue.png");
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+  color: white;
 }
 /*# sourceMappingURL=app.css.map */

@@ -18,14 +18,14 @@
         <div class="col-12 col-sm d-flex align-items-center mr-2">
             <div class="input-group input-group-sm justify-content-center justify-content-sm-end">
                 <div class="input-group-btn">
-                    <button class="btn btn-sm btn-quantity" type="button">-</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray" type="button">-</button>
                 </div>
                 <input type="text" class="amount form-control" value="1" pattern="[0-9]{1,2}">
                 <div class="input-group-btn mr-1">
-                    <button class="btn btn-sm btn-quantity" type="button">+</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray" type="button">+</button>
                 </div>
                 <div class="input-group-btn">
-                    <button class="btn btn-sm btn-action" type="button">Remove</button>
+                    <button class="btn btn-sm btn-texture-red btn-action" type="button">Remove</button>
                 </div>
             </div>
         </div>
