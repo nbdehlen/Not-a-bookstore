@@ -1,5 +1,7 @@
 .splitter {
     border: 5px solid;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .h-90 {

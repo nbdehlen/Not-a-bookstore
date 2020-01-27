@@ -8,8 +8,90 @@ body {
   cursor: not-allowed;
 }
 
+.npc-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.npc-item .image {
+  min-width: 75px;
+  width: 75px;
+  min-height: 75px;
+  height: 75px;
+}
+
+.npc-item .price {
+  color: gold;
+}
+
+.npc-item input.amount {
+  text-align: center;
+  padding: 5px !important;
+  min-width: 30px !important;
+  max-width: 30px !important;
+}
+
+.npc-item .btn-quantity {
+  width: 20px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0 !important;
+  border: 1px solid #ccc !important;
+}
+
+.npc-item .btn-action {
+  width: 35px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0 !important;
+  border: 1px solid #ddd !important;
+}
+
+.cart-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-item .image {
+  min-width: 50px;
+  width: 50px;
+  min-height: 50px;
+  height: 50px;
+}
+
+.cart-item .price {
+  color: gold;
+}
+
+.cart-item input.amount {
+  text-align: center;
+  padding: 5px !important;
+  min-width: 30px !important;
+  max-width: 30px !important;
+}
+
+.cart-item .btn-quantity {
+  width: 20px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0 !important;
+  border: 1px solid #ccc !important;
+}
+
+.cart-item .btn-action {
+  width: 60px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0 !important;
+  border: 1px solid #ddd !important;
+}
+
 .splitter {
   border: 5px solid;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .h-90 {

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Item;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class ShopController extends Controller
     public function index()
     {
         $items = Item::all();
-        //dd($items);
         return view('shop', ['items' => $items]);
     }
 }
