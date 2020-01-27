@@ -19,7 +19,8 @@ class ItemsTableSeeder extends Seeder
             these pants sure look like they got a story to tell.',
             'type' => 'Armor',
             'price' => 2500,
-            'quantity' => 1
+            'quantity' => 1,
+            'image' => ''
         ));
         Item::create(array(
             'name' => 'Rusted Broadsword',
@@ -27,14 +28,16 @@ class ItemsTableSeeder extends Seeder
             with it.',
             'type' => 'Weapon',
             'price' => 300,
-            'quantity' => 8
+            'quantity' => 8,
+            'image' => ''
         ));
         Item::create(array(
             'name' => 'Red Cloak',
             'description' => 'It\'s a red cloak.',
             'type' => 'Accessory',
             'price' => 2500,
-            'quantity' => 15
+            'quantity' => 15,
+            'image' => ''
         ));
         Item::create(array(
             'name' => 'Mana Potion',
@@ -42,7 +45,8 @@ class ItemsTableSeeder extends Seeder
             We got you covered.',
             'type' => 'Consumable',
             'price' => 400,
-            'quantity' => 25
+            'quantity' => 25,
+            'image' => ''
         ));
     }
 }
