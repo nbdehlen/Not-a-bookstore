@@ -15,6 +15,6 @@ class ShopController extends Controller
     public function index()
     {
         $items = Item::all();
-        return view('shop');
+        return view('shop', ['items' => $items]);
     }
 }
