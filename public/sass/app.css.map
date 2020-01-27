@@ -1,10 +1,11 @@
 {
     "version": 3,
-    "mappings": "ACAA,AAAA,IAAI;AACJ,IAAI,CAAC;EACD,MAAM,EAAE,IAAI;CACf;;ACHD,AAAA,aAAa,CAAC;EACV,gBAAgB,EAAE,OAAO;EACzB,MAAM,EAAE,WAAW;CACtB",
+    "mappings": "ACAA,AAAA,IAAI;AACJ,IAAI,CAAC;EACD,MAAM,EAAE,IAAI;CACf;;ACHD,AAAA,aAAa,CAAC;EACV,gBAAgB,EAAE,OAAO;EACzB,MAAM,EAAE,WAAW;CACtB;;ACHD,AAAA,SAAS,CAAC;EACN,MAAM,EAAE,SAAS;CACpB;;AAED,AAAA,KAAK,CAAC;EACF,MAAM,EAAE,GAAG;CACd;;AAED,AAAA,QAAQ,CAAC;EACL,MAAM,EAAE,IAAI;CACf;;AAED,AAAA,QAAQ,CAAC;EACL,MAAM,EAAE,IAAI;CACf",
     "sources": [
         "app.scss",
         "components/_site.scss",
-        "components/_landingpage.scss"
+        "components/_landingpage.scss",
+        "components/_shop.scss"
     ],
     "names": [],
     "file": "app.css"
