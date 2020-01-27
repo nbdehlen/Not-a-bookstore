@@ -15,8 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/items/search', 'ItemController@search');
 
-Route::get('/items', 'ItemController@index');  {
-    return view('items');
-};
+Route::resources([
+    'items' => 'ItemController',
+    'shop' => 'ShopController'
+]);
+
