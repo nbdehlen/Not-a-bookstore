@@ -80,6 +80,21 @@ body {
   border: 1px solid #333 !important;
 }
 
+.npc-item.item-disabled {
+  -webkit-filter: opacity(0.8);
+          filter: opacity(0.8);
+  cursor: not-allowed;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.npc-item.item-disabled button,
+.npc-item.item-disabled input {
+  pointer-events: none;
+}
+
 .cart-item {
   border-bottom: 1px solid #333;
   background-color: rgba(0, 0, 0, 0.75);

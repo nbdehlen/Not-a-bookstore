@@ -27,7 +27,7 @@
         </div>
         <div class="col-6 splitter align-content-between flex-wrap d-flex p-0">
             <div class="row flex-grow-1 h-50-px align-items-center">
-                <div class="col-12">
+                <div id="cart" class="col-12">
                     {{--
                         Placeholder cart item
                         This template should probably be made with javascript or be retrieved with an API call 

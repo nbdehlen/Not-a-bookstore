@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/items/{item_id}/{amount}', 'ItemController@show');
+
 
 Route::resources([
     'items' => 'ItemController',
     'shop' => 'ShopController'
 ]);
-

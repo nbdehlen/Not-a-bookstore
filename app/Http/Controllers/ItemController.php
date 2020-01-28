@@ -17,7 +17,6 @@ class ItemController extends Controller
     {
         $items = Item::get();
         return view('items', compact('items'));
-
     }
 
     /**
@@ -47,9 +46,11 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id, $amount)
     {
-        //
+        $item = Item::where('item_id', $id)->first();
+        $item['amount'] = $amount;
+        return view('cart_item', ['item' => $item]);
     }
 
     /**
@@ -95,7 +96,7 @@ class ItemController extends Controller
         if ($request->ajax()) {
             $output = "";
             $items = DB::table('items')->where('name', 'LIKE', '%' . $request->search . "%")
-            ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
+                ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
             if ($items) {
                 foreach ($items as $key => $item) {
