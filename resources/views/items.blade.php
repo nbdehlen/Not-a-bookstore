@@ -4,7 +4,7 @@
 
 <input type="text" id="search" name="search"> <br/>
 
-<table>
+<table style="background: white;">
     <thead>
         <tr>
             <th>Name</th>

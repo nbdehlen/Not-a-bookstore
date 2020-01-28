@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::get('/items/search', 'ItemController@search');
 
 Route::resources([
-    'items' => 'ItemController',
+  //  'items' => 'ItemController',
     'shop' => 'ShopController'
 ]);
 

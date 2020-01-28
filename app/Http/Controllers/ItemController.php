@@ -92,12 +92,12 @@ class ItemController extends Controller
     */
     public function search(Request $request)
     {
-        if ($request->ajax()) {
+        //if ($request->ajax()) {
             $output = "";
-            $items = DB::table('items')->where('name', 'LIKE', '%' . $request->search . "%")
+            $items = /*DB::table('items')->*/ Item::where('name', 'LIKE', '%' . $request->search . "%")
             ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
-            if ($items) {
+            if ($request->ajax() && $items) {
                 foreach ($items as $key => $item) {
                     $output .= '<tr>' .
                         '<td>' . $item->name . '</td>' .
@@ -108,7 +108,9 @@ class ItemController extends Controller
                         '</tr>';
                 }
                 return ($output);
+            } else {
+                return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
             }
-        }
+       // }
     }
 }

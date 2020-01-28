@@ -5,7 +5,8 @@ $('#search').on('keyup', _.debounce(function(e){
 
     $.ajax({
         type: 'GET',
-        url: '/items/search',
+        //url: '/items/search',
+       url: '/api/items/search',
         data: {
             search: value,
         },
