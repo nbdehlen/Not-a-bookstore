@@ -11,21 +11,21 @@
                 <div class="price col-12 col-sm-3 ml-2 ml-sm-0">
                     {{-- Placeholder coin --}}
                     <img src="https://via.placeholder.com/16" alt="Price">
-                    {{ $item->price }}
+                    <span>{{ $item->price * $item->amount }}</span>
                 </div>
             </div>
         </div>
         <div class="col-12 col-sm d-flex align-items-center mr-2">
             <div class="input-group input-group-sm justify-content-center justify-content-sm-end">
                 <div class="input-group-btn">
-                    <button class="btn btn-sm btn-quantity btn-texture-gray quantity-subtract" type="button">-</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-subtract" type="button">-</button>
                 </div>
                 <input type="text" class="amount form-control" value="{{ $item->amount ?? 1 }}" pattern="[0-9]{1,2}">
                 <div class="input-group-btn mr-1">
-                    <button class="btn btn-sm btn-quantity btn-texture-gray quantity-add" type="button">+</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-add" type="button">+</button>
                 </div>
                 <div class="input-group-btn">
-                    <button class="btn btn-sm btn-texture-red btn-action" type="button">Remove</button>
+                    <button class="btn btn-sm btn-texture-red btn-action-remove" type="button">Remove</button>
                 </div>
             </div>
         </div>

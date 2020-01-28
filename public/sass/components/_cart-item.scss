@@ -28,13 +28,18 @@
         padding-right: 0;
         border-radius: 0 !important;
         border: 1px solid #333 !important;
+        transition: none;
     }
 
-    .btn-action {
+    .btn-action-remove {
         width: 60px;
         text-align: center;
         padding-left: 0;
         padding-right: 0;
         border: 1px solid #333 !important;
+    }
+
+    .btn-disabled {
+        cursor: not-allowed;
     }
 }

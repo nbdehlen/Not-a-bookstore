@@ -126,14 +126,20 @@ body {
   padding-right: 0;
   border-radius: 0 !important;
   border: 1px solid #333 !important;
+  -webkit-transition: none;
+  transition: none;
 }
 
-.cart-item .btn-action {
+.cart-item .btn-action-remove {
   width: 60px;
   text-align: center;
   padding-left: 0;
   padding-right: 0;
   border: 1px solid #333 !important;
+}
+
+.cart-item .btn-disabled {
+  cursor: not-allowed;
 }
 
 .splitter {

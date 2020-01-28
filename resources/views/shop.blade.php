@@ -17,7 +17,7 @@
                     <button class="btn btn-texture-red">Search</button>
                 </div>
             </div>
-            <div class="row">
+            <div id="shop" class="row">
                 @foreach ($items as $item)
                 <div class="col-12">
                     @component('npc_item', ['item' => $item])@endcomponent
@@ -32,7 +32,7 @@
                         Placeholder cart item
                         This template should probably be made with javascript or be retrieved with an API call 
                     --}}
-                    @component('cart_item', ['item' => $items[0]])@endcomponent
+                    {{-- @component('cart_item', ['item' => $items[0]])@endcomponent --}}
                 </div>
             </div>
             <div class="row mx-auto">
