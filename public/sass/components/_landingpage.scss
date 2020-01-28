@@ -1,4 +1,6 @@
 .notavailable {
     background-color: #9c9c9c;
     cursor: not-allowed;
+    filter: grayscale(0.9);
+    transform: scale(0.8);
 }
