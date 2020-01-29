@@ -3,6 +3,10 @@
     background-color: rgba(0, 0, 0, 0.75);
     color: rgb(194, 194, 194);
 
+    .item-name {
+        user-select: text;
+    }
+
     .image {
         max-height: 50px;
         // min-width: 50px;
@@ -17,6 +21,7 @@
         padding: 5px !important;
         min-width: 30px !important;
         max-width: 30px !important;
+        background-color: #eae1c8;
     }
 
     .btn-quantity {

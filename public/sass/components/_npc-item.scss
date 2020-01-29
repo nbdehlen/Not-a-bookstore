@@ -15,12 +15,18 @@
         // height: 75px;
     }
 
+    .item-name,
+    .item-name + p {
+        user-select: text;
+    }
+
     input.amount {
         text-align: center;
         border: 0;
         padding: 5px !important;
         min-width: 30px !important;
         max-width: 30px !important;
+        background-color: #eae1c8;
     }
 
     .btn-quantity {

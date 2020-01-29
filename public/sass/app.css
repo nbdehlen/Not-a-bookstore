@@ -176,12 +176,21 @@ body {
   max-height: 100px;
 }
 
+.npc-item .item-name,
+.npc-item .item-name + p {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}
+
 .npc-item input.amount {
   text-align: center;
   border: 0;
   padding: 5px !important;
   min-width: 30px !important;
   max-width: 30px !important;
+  background-color: #eae1c8;
 }
 
 .npc-item .btn-quantity {
@@ -207,6 +216,13 @@ body {
   color: #c2c2c2;
 }
 
+.cart-item .item-name {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}
+
 .cart-item .image {
   max-height: 50px;
 }
@@ -217,6 +233,7 @@ body {
   padding: 5px !important;
   min-width: 30px !important;
   max-width: 30px !important;
+  background-color: #eae1c8;
 }
 
 .cart-item .btn-quantity {
