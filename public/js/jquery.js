@@ -12,14 +12,13 @@ $(document).ready(function () {
 
             success: function (data) {
               $('#shop').html(data);
+              addListeners();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);
             },
         })
     }, 50));
-
-
 
 
     let cart = [];
