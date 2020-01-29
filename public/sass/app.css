@@ -157,6 +157,8 @@ body {
 
 .search button {
   height: 38px;
+  color: #f1d4cd;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
   background-image: url("/images/btn-diablo-secondary-red.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -263,6 +265,12 @@ body {
   padding-left: 0;
   padding-right: 0;
   border: 1px solid #333 !important;
+}
+
+.container-fluid,
+.book {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 .scrollbar {
