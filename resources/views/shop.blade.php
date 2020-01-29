@@ -22,7 +22,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-6 splitter align-content-between flex-wrap d-flex">
+        <div class="col-6 splitter splitter-right align-content-between flex-wrap d-flex">
             <div class="row flex-grow-1 h-50-px align-items-center">
                 <div class="col-12">
                     {{--

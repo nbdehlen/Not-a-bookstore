@@ -214,6 +214,10 @@ body {
   padding: 0;
 }
 
+.splitter-right {
+  height: calc(100% - 62px);
+}
+
 .h-90 {
   height: 90%;
 }
@@ -295,7 +299,7 @@ body {
   position: sticky;
   bottom: 0;
   z-index: 1;
-  padding: 12px;
+  padding: 14px;
   background-image: url("/images/bg-messagebox.jpg");
   background-repeat: no-repeat;
   background-position: bottom right;

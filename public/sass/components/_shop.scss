@@ -4,6 +4,10 @@
     overflow-x: hidden;
     height: 100%;
     padding: 0;
+
+    &-right {
+        height: calc(100% - 62px);
+    }
 }
 
 .h-90 {
@@ -82,7 +86,7 @@
     position: sticky;
     bottom: 0;
     z-index: 1;
-    padding: 12px;
+    padding: 14px;
     background-image: url("/images/bg-messagebox.jpg");
     background-repeat: no-repeat;
     background-position: bottom right;
