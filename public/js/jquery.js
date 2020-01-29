@@ -25,6 +25,7 @@ $(document).ready(function () {
 
     let cart = [];
 
+
     function addValue() {
 
         let amountEl = $(this)
@@ -181,9 +182,21 @@ $(document).ready(function () {
         // let amount = itemEl.find('input').val();
 
 
+
+
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data('quantity');
         let newQuantity = shopItemQuantity - 1;
+        let priceEl = shopItemEl.find('.price span');
+        let cartEl = $('body')
+            .find('#cart');
+        let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+        let cartItemPriceEl = cartItemEl.find('.price span');
+        let cartItemPrice = cartItemPriceEl.text();
+        let price = priceEl.text();
+        price = parseInt(price, 10);
+        cartItemPrice = parseInt(cartItemPrice, 10);
+        cartItemPriceEl.text(cartItemPrice + price);
         if (newQuantity < 0) {
             $(this).prop('disabled', true);
             $(this).addClass('btn-disabled');
@@ -233,8 +246,19 @@ $(document).ready(function () {
         shopItemEl.attr('data-quantity', newQuantity);
         shopItemEl.find('.quantity').text(newQuantity);
 
-        // TODO: Reduce price here
+        // Reduce price when substracting an item from the cart
+        let priceEl = shopItemEl.find('.price span');
+        let cartEl = $('body')
+            .find('#cart');
+        let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+        let cartItemPriceEl = cartItemEl.find('.price span');
+        let cartItemPrice = cartItemPriceEl.text();
+        let price = priceEl.text();
+        price = parseInt(price, 10);
+        cartItemPrice = parseInt(cartItemPrice, 10);
+        cartItemPriceEl.text(cartItemPrice - price);
 
+        //
         if (amount <= 1) {
             itemEl.remove();
         }

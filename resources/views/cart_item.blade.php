@@ -20,7 +20,7 @@
                 <div class="input-group-btn">
                     <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-subtract" type="button">-</button>
                 </div>
-                <input type="text" class="amount form-control" value="{{ $item->amount ?? 1 }}" pattern="[0-9]{1,2}">
+                <input type="text" class="amount form-control" value="{{ $item->amount ?? 1 }}" pattern="[0-9]{1,2}" disabled>
                 <div class="input-group-btn mr-1">
                     <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-add" type="button">+</button>
                 </div>
