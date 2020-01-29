@@ -1,21 +1,23 @@
 .npc-item {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #28241d;
     background-color: rgba(0, 0, 0, 0.75);
     color: rgb(194, 194, 194);
 
-    .image {
-        min-width: 75px;
-        width: 75px;
-        min-height: 75px;
-        height: 75px;
+    &:nth-child(even) {
+        background-color: rgba(9, 8, 6, 0.75);
     }
 
-    .price {
-        color: gold;
+    .image {
+        max-height: 100px;
+        // min-width: 75px;
+        // width: 75px;
+        // min-height: 75px;
+        // height: 75px;
     }
 
     input.amount {
         text-align: center;
+        border: 0;
         padding: 5px !important;
         min-width: 30px !important;
         max-width: 30px !important;

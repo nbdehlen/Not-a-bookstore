@@ -1,6 +1,22 @@
 html,
 body {
     height: 100%;
-    background-image: url('/images/wallpaper.png');
-    background-size: cover;
+}
+
+// Bootstrap overrides
+*:focus {
+    box-shadow: none !important;
+    border: none;
+}
+
+.exocet {
+    font-family: "Exocet Blizzard";
+
+    &-light {
+        font-family: "Exocet Blizzard Light";
+    }
+
+    &-heavy {
+        font-family: "Exocet Blizzard Heavy";
+    }
 }

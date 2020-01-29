@@ -1,4 +1,4 @@
-<div class="npc-item py-2" data-id="{{ $item->item_id }}">
+<div class="npc-item col-12 py-2" data-id="{{ $item->item_id }}">
     <div class="row">
         <div class="col-12 col-sm-8">
             <div class="row">
@@ -6,7 +6,7 @@
                     <img src="{{ asset($item->image) }}" class="image" alt="{{ $item->name }}">
                 </div>
                 <div class="col">
-                    <h5 class="h6 mt-0">{{ $item->name }}</h5>
+                    <h5 class="item-name">{{ $item->name }}</h5>
                     <p class="small mb-0">{{ $item->description }}</p>
                 </div>
             </div>

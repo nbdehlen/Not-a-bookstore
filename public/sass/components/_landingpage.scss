@@ -4,3 +4,9 @@
     filter: grayscale(0.9);
     transform: scale(0.8);
 }
+
+.portrait {
+    box-shadow: 0 0 20px #000000;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}

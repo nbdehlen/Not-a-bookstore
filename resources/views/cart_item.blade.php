@@ -6,7 +6,7 @@
                     <img src="{{ asset($item->image) }}" class="image" alt="{{ $item->name }}">
                 </div>
                 <div class="col-auto col-sm-6">
-                    <h5 class="h6 mt-0">{{ $item->name }}</h5>
+                    <h5 class="item-name mb-0">{{ $item->name }}</h5>
                 </div>
                 <div class="price col-12 col-sm-3 ml-2 ml-sm-0">
                     {{-- Placeholder coin --}}
