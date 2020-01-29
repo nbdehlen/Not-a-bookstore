@@ -125,6 +125,10 @@ body {
   border-radius: 0;
 }
 
+.search button {
+  height: 38px;
+}
+
 .search .form-control {
   background-color: #eae1c8;
 }
