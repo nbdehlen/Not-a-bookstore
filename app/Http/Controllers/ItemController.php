@@ -90,45 +90,18 @@ class ItemController extends Controller
     /* Dynamic search */
     public function search(Request $request)
     {
-            $output = "";
-            // Get search result from DB matching item name or item type
+            // Get search result from database matching item name or item type
             $items = Item::where('name', 'LIKE', '%' . $request->search . "%")
             ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
             // if request is type ajax and $items is defined
             if ($request->ajax() && $items) {
                foreach ($items as $key => $item) {
-                   /* $output .= '<tr>' .
-                        '<td>' . $item->name . '</td>' .
-                        '<td>' . $item->description . '</td>' .
-                        '<td>' . $item->type . '</td>' .
-                        '<td>' . $item->price . '</td>' .
-                        '<td>' . $item->quantity . '</td>' .
-                        '</tr>';*/
-                        //$output .= "<div class="col-12"> @component('npc_item', ['item' => $item])@endcomponent  </div>";
                         return view('npc_items', ['items' => $items]);
                }
-              
-                 
-                //return $output;
-                //return $output;
-               // return ($items);
-               //return view('npc_item', $items); //, compact('items'));
-               //$view=view('npc_item');
-                //$view=$view->render($items);
-                //$responseData->responseSuccess($view);
-                //return $view;
-                //return view('npc_item', compact('items'));
-                
-
-               // return view('shop', compact('items'));
-
-            } else /*if ($request == "shop")*/ {
-                // Return the search result in JSON when using the direct search path
+            } else {
+            // if request is not ajax, return json
                return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
-               //return $items;
-               //echo $request;
-               //return view('shop', compact('items'));
             }
     }
 }
