@@ -1,4 +1,4 @@
-.splitter {
+.scrollbar {
     // border: 5px solid transparent;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -11,6 +11,18 @@
 
     &-right {
         height: calc(100% - 72px);
+    }
+}
+
+.splitter {
+    &-left {
+        z-index: 2;
+        border-right: 1px solid #28241d;
+    }
+
+    &-right {
+        z-index: 2;
+        border-left: 1px solid #28241d;
     }
 }
 
@@ -122,6 +134,17 @@
     background-repeat: no-repeat;
     background-position: bottom right;
     border-top: 1px solid #28241d;
+
+    &:before {
+        content: " ";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        box-shadow: 0 -6px 16px #000000;
+    }
 
     .price {
         font-size: 24px;
