@@ -3,12 +3,6 @@ body {
     height: 100%;
 }
 
-// Bootstrap overrides
-*:focus {
-    box-shadow: none !important;
-    border: none;
-}
-
 .exocet {
     font-family: "Exocet Blizzard";
 
@@ -19,4 +13,18 @@ body {
     &-heavy {
         font-family: "Exocet Blizzard Heavy";
     }
+
+    &-reaper {
+        font-family: "Exocet Reaper";
+    }
+}
+
+* {
+    user-select: none;
+}
+
+// Bootstrap override
+*:focus {
+    box-shadow: none !important;
+    border: none;
 }

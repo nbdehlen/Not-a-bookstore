@@ -32,23 +32,37 @@
 
 .btn-texture-red {
     background-image: url("/images/btn-texture-red.png");
-    color: white;
+    color: #f1d4cd;
 }
 
 .btn-texture-blue {
     background-image: url("/images/btn-texture-blue.png");
-    color: white;
+    color: #cbdcf0;
 }
 
 .btn-texture-gray {
     background-image: url("/images/btn-texture-blue.png");
     filter: grayscale(1);
-    color: white;
+    color: #ffffff;
 }
 
 .btn:hover {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     color: #ffffff;
+}
+
+#accept,
+#decline {
+    border: 1px solid #28241d;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
+}
+
+#accept {
+    color: #cbdcf0;
+}
+
+#decline {
+    color: #f1d4cd;
 }
 
 .item-name {
@@ -74,7 +88,7 @@
     background-position: bottom right;
 
     .price {
-        font-size: 20px;
+        font-size: 24px;
     }
 }
 
