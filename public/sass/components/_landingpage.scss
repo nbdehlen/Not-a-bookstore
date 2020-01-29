@@ -1,12 +1,26 @@
-.notavailable {
-    background-color: #9c9c9c;
-    cursor: not-allowed;
-    filter: grayscale(0.9);
+.not-available {
     transform: scale(0.8);
+
+    img {
+        cursor: not-allowed;
+        filter: grayscale(0.9);
+        background-color: #9c9c9c;
+    }
 }
 
 .portrait {
     box-shadow: 0 0 20px #000000;
-    border: 1px solid #dee2e6;
+    border: 1px solid #16191d;
     border-radius: 0.25rem;
+}
+
+.text-shadow {
+    text-shadow: 0 0 10px #000000;
+}
+
+.landing-headline {
+    p {
+        filter: drop-shadow(2px 4px 6px #000000);
+        color: #e9c394;
+    }
 }
