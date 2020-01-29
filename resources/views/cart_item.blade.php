@@ -1,4 +1,4 @@
-<div class="cart-item py-2" data-id="{{ $item->item_id }}">
+<div class="cart-item col-12 py-2" data-id="{{ $item->item_id }}">
     <div class="row">
         <div class="col-12 col-sm-8">
             <div class="row align-items-center">
