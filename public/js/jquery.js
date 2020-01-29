@@ -5,14 +5,23 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'GET',
-            url: 'api/items/search',
+            url: 'shop/search',
             data: {
-                search: value,
+             search : value,
             },
 
             success: function (data) {
-                $('#initial_table').hide();
-                $('#ajax').html(data);
+               // $('#shop').hide();
+               // console.log(data);
+               //$('#ajax').html(data);
+               //console.log(data)
+               //$('#ajax').html(data);
+              //$('#ajax').show();
+              $('#shop').html(data);
+              
+
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);

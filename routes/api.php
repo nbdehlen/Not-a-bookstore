@@ -13,13 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-Route::resource('search', 'SearchController');
+//Route::resource('search', 'SearchController');
 
-Route::get('/items/search', 'ItemController@search');
+//Route::get('/items/{item_id}/{amount}', 'ItemController@show');
+//Route::get('/shop/{item_id}/{amount}', 'ItemController@search');
+//Route::get('/shop', 'ItemController@show');
+Route::get('/shop/search', 'ItemController@search');
+//Route::get('/shop', 'ItemController@search');
 Route::resources([
-       'items' => 'ItemController',
+      // 'items' => 'ItemController',
+      // 'shop' => 'ShopController'
+      'shop' => 'ItemController'
    ]);

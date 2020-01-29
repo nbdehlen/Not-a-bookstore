@@ -16,7 +16,7 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::get();
-        return view('items', compact('items'));
+        return view('shop', compact('items'));
     }
 
     /**
@@ -97,19 +97,38 @@ class ItemController extends Controller
 
             // if request is type ajax and $items is defined
             if ($request->ajax() && $items) {
-                foreach ($items as $key => $item) {
-                    $output .= '<tr>' .
+               foreach ($items as $key => $item) {
+                   /* $output .= '<tr>' .
                         '<td>' . $item->name . '</td>' .
                         '<td>' . $item->description . '</td>' .
                         '<td>' . $item->type . '</td>' .
                         '<td>' . $item->price . '</td>' .
                         '<td>' . $item->quantity . '</td>' .
-                        '</tr>';
-                }
-                return ($output);
-            } else {
+                        '</tr>';*/
+                        //$output .= "<div class="col-12"> @component('npc_item', ['item' => $item])@endcomponent  </div>";
+                        return view('npc_items', ['items' => $items]);
+               }
+              
+                 
+                //return $output;
+                //return $output;
+               // return ($items);
+               //return view('npc_item', $items); //, compact('items'));
+               //$view=view('npc_item');
+                //$view=$view->render($items);
+                //$responseData->responseSuccess($view);
+                //return $view;
+                //return view('npc_item', compact('items'));
+                
+
+               // return view('shop', compact('items'));
+
+            } else /*if ($request == "shop")*/ {
                 // Return the search result in JSON when using the direct search path
-                return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
+               return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
+               //return $items;
+               //echo $request;
+               //return view('shop', compact('items'));
             }
     }
 }
