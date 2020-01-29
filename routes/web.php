@@ -17,8 +17,9 @@ Route::get('/', function () {
 
 Route::get('/items/{item_id}/{amount}', 'ItemController@show');
 
+//Route::get('/items/search', 'ItemController@search');
 
 Route::resources([
-    'items' => 'ItemController',
+  //  'items' => 'ItemController',
     'shop' => 'ShopController'
 ]);

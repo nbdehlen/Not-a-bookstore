@@ -5,7 +5,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'GET',
-            url: '/items/search',
+            url: 'api/items/search',
             data: {
                 search: value,
             },

@@ -87,18 +87,16 @@ class ItemController extends Controller
         //
     }
 
-    /*
-    Dynamic search. If the request is ajax, fetch rows from table 'items' where 'name' or 'type' 
-    match the ajax search value. Loop over matching rows and return.
-    */
+    /* Dynamic search */
     public function search(Request $request)
     {
-        if ($request->ajax()) {
             $output = "";
-            $items = DB::table('items')->where('name', 'LIKE', '%' . $request->search . "%")
-                ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
+            // Get search result from DB matching item name or item type
+            $items = Item::where('name', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
-            if ($items) {
+            // if request is type ajax and $items is defined
+            if ($request->ajax() && $items) {
                 foreach ($items as $key => $item) {
                     $output .= '<tr>' .
                         '<td>' . $item->name . '</td>' .
@@ -109,7 +107,9 @@ class ItemController extends Controller
                         '</tr>';
                 }
                 return ($output);
+            } else {
+                // Return the search result in JSON when using the direct search path
+                return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
             }
-        }
     }
 }
