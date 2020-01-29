@@ -26,5 +26,6 @@ body {
 // Bootstrap override
 *:focus {
     box-shadow: none !important;
-    border: none;
+    border: none !important;
+    outline: 0 !important;
 }

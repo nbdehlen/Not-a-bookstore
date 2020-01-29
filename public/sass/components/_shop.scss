@@ -40,11 +40,13 @@
 
 .btn-texture-red {
     background-image: url("/images/btn-texture-red.png");
+    background-repeat: no-repeat;
     color: #f1d4cd;
 }
 
 .btn-texture-blue {
     background-image: url("/images/btn-texture-blue.png");
+    background-repeat: no-repeat;
     color: #cbdcf0;
 }
 
@@ -61,16 +63,41 @@
 
 #accept,
 #decline {
-    border: 1px solid #28241d;
+    // border: 1px solid #28241d;
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
+    transition: 0.1s ease;
+
+    &:hover {
+        box-shadow: none;
+    }
 }
 
 #accept {
     color: #cbdcf0;
+    background-image: url("/images/btn-diablo-blue.png");
+    // background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 159px;
+    height: 43px;
+
+    &:active {
+        background-image: url("/images/btn-diablo-blue-active.png");
+    }
 }
 
 #decline {
     color: #f1d4cd;
+    background-image: url("/images/btn-diablo-red.png");
+    // background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 159px;
+    height: 43px;
+
+    &:active {
+        background-image: url("/images/btn-diablo-red-active.png");
+    }
 }
 
 .item-name {
