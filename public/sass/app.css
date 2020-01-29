@@ -69,11 +69,40 @@ body {
   background-color: #9c9c9c;
 }
 
+.vendor:not(.not-available) h2 {
+  color: #e8dac9;
+}
+
+.vendor:not(.not-available) a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-decoration: none;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.vendor:not(.not-available) a:hover {
+  -webkit-transform: scale(1.035);
+          transform: scale(1.035);
+}
+
+.vendor:not(.not-available) a:hover .portrait {
+  -webkit-box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.85), 0 0 20px #501d14;
+          box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.85), 0 0 20px #501d14;
+}
+
+.vendor:not(.not-available) a:hover h2 {
+  color: #f0e7db;
+}
+
 .portrait {
   -webkit-box-shadow: 0 0 20px #000000;
           box-shadow: 0 0 20px #000000;
   border: 1px solid #16191d;
   border-radius: 0.25rem;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .text-shadow {
