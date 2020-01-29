@@ -260,6 +260,10 @@ body {
   padding: 0;
 }
 
+.splitter-left {
+  height: calc(825px - 149px) !important;
+}
+
 .splitter-right {
   height: calc(100% - 62px);
 }

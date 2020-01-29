@@ -1,4 +1,4 @@
-<div class="col-auto pr-0 border-bottom border-secondary">
+<div class="col-auto p-0 border-bottom border-secondary">
     <img src="{{asset('images/shop-vendor.png')}}" alt="..." class="messagebox-image img">
 </div>
 <div class="col messagebox">

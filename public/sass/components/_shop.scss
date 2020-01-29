@@ -5,6 +5,10 @@
     height: 100%;
     padding: 0;
 
+    &-left {
+        height: calc(825px - 149px) !important;
+    }
+
     &-right {
         height: calc(100% - 62px);
     }

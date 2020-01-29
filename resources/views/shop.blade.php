@@ -7,7 +7,7 @@
 <!-- please note that the borders are currently only set to make it clear how large the sizes of the boxes shall be -->
 <div class="container-fluid align-items-center d-flex h-100" style="width: 1299px !important;">
     <div class="row shop-bg">
-        <div class="col-6 splitter">
+        <div class="col-6">
             <div class="top-bar">
                 <div class="row">
                     @component('message_box')@endcomponent
@@ -16,7 +16,7 @@
                     @component('search')@endcomponent
                 </div>
             </div>
-            <div class="row">
+            <div class="row splitter splitter-left">
                 @foreach ($items as $item)
                     @component('npc_item', ['item' => $item])@endcomponent
                 @endforeach
