@@ -273,6 +273,10 @@ body {
           transform: scale(0.9);
 }
 
+.text-secondary {
+  color: #cfb991 !important;
+}
+
 .scrollbar {
   overflow-y: scroll;
   overflow-x: hidden;
