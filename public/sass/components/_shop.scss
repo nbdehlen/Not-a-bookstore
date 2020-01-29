@@ -10,7 +10,7 @@
     }
 
     &-right {
-        height: calc(100% - 62px);
+        height: calc(100% - 72px);
     }
 }
 
@@ -121,6 +121,7 @@
     background-image: url("/images/bg-messagebox.jpg");
     background-repeat: no-repeat;
     background-position: bottom right;
+    border-top: 1px solid #28241d;
 
     .price {
         font-size: 24px;
