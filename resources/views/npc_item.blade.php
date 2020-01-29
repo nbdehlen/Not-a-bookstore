@@ -1,3 +1,4 @@
+<div class="col-12">
 <div class="npc-item py-2" data-id="{{ $item->item_id }}" data-quantity="{{ $item->quantity }}">
     <div class="row">
         <div class="col-12 col-sm-8">
@@ -36,4 +37,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

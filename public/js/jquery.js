@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#search').on('keyup', _.debounce(function (e) {
         // "this" refers to the value in #search  
-        var value = $(this).val();
+        let value = $(this).val();
 
         $.ajax({
             type: 'GET',
@@ -11,17 +11,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-               // $('#shop').hide();
-               // console.log(data);
-               //$('#ajax').html(data);
-               //console.log(data)
-               //$('#ajax').html(data);
-              //$('#ajax').show();
               $('#shop').html(data);
-              
-
-
-
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);
@@ -108,7 +98,8 @@ $(document).ready(function () {
             if (cartItemEl.length === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: `/items/${itemId}/${amount}`,
+                    url: `/api/shop/${itemId}/${amount}`,
+                    //url: 'items/search',
                     success: function (data) {
                         $('#cart').append(data);
                         addListeners();

@@ -19,21 +19,11 @@
             </div>
             <div id="shop" class="row">
                 @foreach ($items as $item)
-                <div class="col-12">
+                
                    @component('npc_item', ['item' => $item])@endcomponent
-                </div>
+               
                 @endforeach
             </div>
-
-           <div id="ajax" class="row" style="display: none;">
-                 @foreach ($items as $item)
-                <div class="col-12">
-                   @component('npc_item', ['item' => $item])@endcomponent
-                </div>
-                @endforeach
-
-            </div>
-
         </div>
         <div class="col-6 splitter align-content-between flex-wrap d-flex p-0">
             <div class="row flex-grow-1 h-50-px align-items-center">
