@@ -238,6 +238,21 @@ body {
   border: 1px solid #333 !important;
 }
 
+.npc-item.item-disabled {
+  -webkit-filter: opacity(0.8);
+          filter: opacity(0.8);
+  cursor: not-allowed;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.npc-item.item-disabled button,
+.npc-item.item-disabled input {
+  pointer-events: none;
+}
+
 .cart-item {
   color: #c2c2c2;
   background-color: rgba(0, 0, 0, 0.8);
@@ -277,14 +292,20 @@ body {
   padding-right: 0;
   border-radius: 0 !important;
   border: 1px solid #333 !important;
+  -webkit-transition: none;
+  transition: none;
 }
 
-.cart-item .btn-action {
+.cart-item .btn-action-remove {
   width: 60px;
   text-align: center;
   padding-left: 0;
   padding-right: 0;
   border: 1px solid #333 !important;
+}
+
+.cart-item .btn-disabled {
+  cursor: not-allowed;
 }
 
 .container-fluid,

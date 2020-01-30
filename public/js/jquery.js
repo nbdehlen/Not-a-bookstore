@@ -269,6 +269,43 @@ $(document).ready(function () {
         }
     }
 
+    const messageBoxList = {
+        "welcome": [
+            "Welcome, stranger. I have everything you require, right here.",
+            "Welcome, stranger"
+        ],
+        "accept": [
+            "Thank you for your purchase.",
+            "Thank you for your purchase. I hope you're not my last customer."
+        ],
+        "decline": [
+
+            "All right, buy something next time, will you? This stuff's heavy."
+        ]
+    };
+
+    function setRandomMessage(type) {
+        let randomIndex = Math.floor(Math.random() * messageBoxList[type].length);
+        $('.messagebox-message').text(messageBoxList[type][randomIndex]);
+    }
+    setRandomMessage("welcome");
+
+    function acceptPurchase() {
+        setRandomMessage("accept");
+        $('body')
+            .find('#cart')
+            .html('');
+    }
+
+    function declinePurchase() {
+        setRandomMessage("decline");
+        $('body')
+            .find('#cart')
+            .html('');
+    }
+
+
+
     let elements = [{
             selector: '.quantity-add',
             event: 'click',
@@ -303,6 +340,16 @@ $(document).ready(function () {
             selector: '.cart-quantity-subtract',
             event: 'click',
             handler: cartSubtractValue
+        },
+        {
+            selector: '#accept',
+            event: 'click',
+            handler: acceptPurchase
+        },
+        {
+            selector: '#decline',
+            event: 'click',
+            handler: declinePurchase
         }
     ];
 
