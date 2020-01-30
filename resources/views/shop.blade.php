@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @component('modal')@endcomponent
-
+@component('modal')@endcomponent
 <div class="book">
     <div></div>
 </div>

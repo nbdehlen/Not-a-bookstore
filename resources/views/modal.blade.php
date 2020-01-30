@@ -6,9 +6,11 @@
         </div>
         <div class="modal-body">
             <ul class="exocet-light small">
-                @foreach ($items as $item)
-                    <li>{{ $item->name }} x {{ $item->amount }}</li>
-                @endforeach
+                @isset($items)
+                    @foreach ($items as $item)
+                        <li>{{ $item->name }} x {{ $item->amount }}</li>
+                    @endforeach
+                @endisset
             </ul>
         </div>
         <div class="modal-footer justify-content-center">
