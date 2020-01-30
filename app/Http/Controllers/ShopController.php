@@ -12,9 +12,9 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   /* public function index()
     {
         $items = Item::all();
         return view('shop', ['items' => $items]);
-    }
+    }*/
 }

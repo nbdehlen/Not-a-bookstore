@@ -97,11 +97,11 @@ class ItemController extends Controller
             // if request is type ajax and $items is defined
             if ($request->ajax() && $items) {
                foreach ($items as $key => $item) {
-                        return view('npc_items', ['items' => $items]);
+                        return view('npc_items', compact('items'));
                }
-            } else {
+            } /*else {
             // if request is not ajax, return json
                return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
-            }
+            }*/
     }
 }

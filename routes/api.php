@@ -20,8 +20,13 @@ use Illuminate\Http\Request;
 
 Route::get('/shop/{item_id}/{amount}', 'ItemController@show');
 
+/*
 Route::get('/shop/search', 'ItemController@search');
+*/
 
-Route::resources([
-'shop' => 'ItemController'
-   ]);
+Route::resource(
+    '/', 'SearchController'
+       );
+
+//Route::get('/search' ,'SearchController@index');
+

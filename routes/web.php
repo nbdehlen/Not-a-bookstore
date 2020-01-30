@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 //Route::get('/items/{item_id}/{amount}', 'ItemController@show');
 
-//Route::get('/items/search', 'ItemController@search');
+Route::get('/shop/search', 'ItemController@search');
 
-/*Route::resources([
+Route::resources([
   //  'items' => 'ItemController',
-    'shop' => 'ShopController'
-]);*/
+  //  'shop' => 'ShopController'
+  'shop' => 'ItemController'
+]);
