@@ -9,7 +9,7 @@
                     <h5 class="item-name mb-0">{{ $item->name }}</h5>
                 </div>
                 <div class="price col-12 col-sm-3 ml-2 ml-sm-0 d-flex align-items-center justify-content-sm-center">
-                    {{ $item->price * $item->amount }}
+                    <span>{{ $item->price * $item->amount }}</span>
                     <img src="{{ asset("images/gold.png") }}" class="ml-1" alt="Price">
                 </div>
             </div>
