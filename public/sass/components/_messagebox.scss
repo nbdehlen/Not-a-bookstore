@@ -1,0 +1,29 @@
+.messagebox {
+    position: relative;
+    background-image: url("/images/bg-messagebox.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+
+    &-image {
+        border-right: 1px solid #28241d;
+    }
+
+    &-message {
+        color: #dadada;
+        position: absolute;
+        right: 0;
+        left: 20px;
+        top: 35px;
+        margin: 0;
+        padding-right: 15px;
+    }
+
+    &-name {
+        display: block;
+        position: absolute;
+        top: 4px;
+        left: 8px;
+        color: #c8a880;
+        font-family: "Exocet Blizzard";
+    }
+}

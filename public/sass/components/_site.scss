@@ -1,6 +1,48 @@
 html,
 body {
     height: 100%;
-    background-image: url('/images/wallpaper.png');
-    background-size: cover;
+}
+
+.exocet {
+    font-family: "Exocet Blizzard";
+
+    &-light {
+        font-family: "Exocet Blizzard Light";
+    }
+
+    &-heavy {
+        font-family: "Exocet Blizzard Heavy";
+    }
+
+    &-reaper {
+        font-family: "Exocet Reaper";
+    }
+}
+
+* {
+    user-select: none;
+}
+
+// Bootstrap override
+*:focus {
+    box-shadow: none !important;
+    border: none !important;
+    outline: 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    // background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-track {
+    background: hsla(29, 36%, 0%, 0.75);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-left: 1px solid #28241d;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: hsla(29, 36%, 25%, 1);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }

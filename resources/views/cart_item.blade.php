@@ -1,17 +1,16 @@
-<div class="cart-item py-2" data-id="{{ $item->item_id }}">
+<div class="cart-item col-12 py-2" data-id="{{ $item->item_id }}">
     <div class="row">
         <div class="col-12 col-sm-8">
             <div class="row align-items-center">
-                <div class="col-3 col-sm-2 ml-2">
+                <div class="col-3 col-sm-2 ml-2 text-center justify-self-center">
                     <img src="{{ asset($item->image) }}" class="image" alt="{{ $item->name }}">
                 </div>
                 <div class="col-auto col-sm-6">
-                    <h5 class="h6 mt-0">{{ $item->name }}</h5>
+                    <h5 class="item-name mb-0">{{ $item->name }}</h5>
                 </div>
-                <div class="price col-12 col-sm-3 ml-2 ml-sm-0">
-                    {{-- Placeholder coin --}}
-                    <img src="https://via.placeholder.com/16" alt="Price">
-                    <span>{{ $item->price * $item->amount }}</span>
+                <div class="price col-12 col-sm-3 ml-2 ml-sm-0 d-flex align-items-center justify-content-sm-center">
+                    {{ $item->price * $item->amount }}
+                    <img src="{{ asset("images/gold.png") }}" class="ml-1" alt="Price">
                 </div>
             </div>
         </div>

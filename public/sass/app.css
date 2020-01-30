@@ -26,41 +26,199 @@
 html,
 body {
   height: 100%;
-  background-image: url("/images/wallpaper.png");
-  background-size: cover;
 }
 
-.notavailable {
-  background-color: #9c9c9c;
-  cursor: not-allowed;
-  -webkit-filter: grayscale(0.9);
-          filter: grayscale(0.9);
+.exocet {
+  font-family: "Exocet Blizzard";
+}
+
+.exocet-light {
+  font-family: "Exocet Blizzard Light";
+}
+
+.exocet-heavy {
+  font-family: "Exocet Blizzard Heavy";
+}
+
+.exocet-reaper {
+  font-family: "Exocet Reaper";
+}
+
+* {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+*:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  border: none !important;
+  outline: 0 !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-left: 1px solid #28241d;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #573f29;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.not-available {
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
 }
 
+.not-available img {
+  cursor: not-allowed;
+  -webkit-filter: grayscale(0.9);
+          filter: grayscale(0.9);
+  background-color: #9c9c9c;
+}
+
+.vendor:not(.not-available) h2 {
+  color: #e8dac9;
+}
+
+.vendor:not(.not-available) a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-decoration: none;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.vendor:not(.not-available) a:hover {
+  -webkit-transform: scale(1.035);
+          transform: scale(1.035);
+}
+
+.vendor:not(.not-available) a:hover .portrait {
+  -webkit-box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.85), 0 0 20px #501d14;
+          box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.85), 0 0 20px #501d14;
+}
+
+.vendor:not(.not-available) a:hover h2 {
+  color: #f0e7db;
+}
+
+.portrait {
+  -webkit-box-shadow: 0 0 20px #000000;
+          box-shadow: 0 0 20px #000000;
+  border: 1px solid #16191d;
+  border-radius: 0.25rem;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.text-shadow {
+  text-shadow: 0 0 10px #000000;
+}
+
+.landing-headline p {
+  -webkit-filter: drop-shadow(2px 4px 6px #000000);
+          filter: drop-shadow(2px 4px 6px #000000);
+  color: #e9c394;
+}
+
+.messagebox {
+  position: relative;
+  background-image: url("/images/bg-messagebox.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+.messagebox-image {
+  border-right: 1px solid #28241d;
+}
+
+.messagebox-message {
+  color: #dadada;
+  position: absolute;
+  right: 0;
+  left: 20px;
+  top: 35px;
+  margin: 0;
+  padding-right: 15px;
+}
+
+.messagebox-name {
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  color: #c8a880;
+  font-family: "Exocet Blizzard";
+}
+
+.search {
+  border-bottom: 1px solid #28241d;
+}
+
+.search .form-control,
+.search button {
+  border-radius: 0;
+}
+
+.search button {
+  height: 38px;
+  color: #f1d4cd;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
+  background-image: url("/images/btn-diablo-secondary-red.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.search .form-control {
+  background-color: #eae1c8;
+}
+
 .npc-item {
-  border-bottom: 1px solid #333;
-  background-color: rgba(0, 0, 0, 0.75);
   color: #c2c2c2;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid #28241d;
+  -webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.npc-item:nth-child(even) {
+  background-color: rgba(9, 8, 6, 0.75);
 }
 
 .npc-item .image {
-  min-width: 75px;
-  width: 75px;
-  min-height: 75px;
-  height: 75px;
+  max-height: 100px;
+  -webkit-filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.5));
+          filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.5));
 }
 
-.npc-item .price {
-  color: gold;
+.npc-item .item-name,
+.npc-item .item-name + p {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
 }
 
 .npc-item input.amount {
   text-align: center;
+  border: 0;
   padding: 5px !important;
   min-width: 30px !important;
   max-width: 30px !important;
+  background-color: #eae1c8;
 }
 
 .npc-item .btn-quantity {
@@ -80,43 +238,36 @@ body {
   border: 1px solid #333 !important;
 }
 
-.npc-item.item-disabled {
-  -webkit-filter: opacity(0.8);
-          filter: opacity(0.8);
-  cursor: not-allowed;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.npc-item.item-disabled button,
-.npc-item.item-disabled input {
-  pointer-events: none;
-}
-
 .cart-item {
-  border-bottom: 1px solid #333;
-  background-color: rgba(0, 0, 0, 0.75);
   color: #c2c2c2;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #28241d;
+  -webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.75);
+          box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.75);
+}
+
+.cart-item:nth-child(even) {
+  background-color: rgba(9, 8, 6, 0.75);
+}
+
+.cart-item .item-name {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
 }
 
 .cart-item .image {
-  min-width: 50px;
-  width: 50px;
-  min-height: 50px;
-  height: 50px;
-}
-
-.cart-item .price {
-  color: gold;
+  max-height: 50px;
 }
 
 .cart-item input.amount {
   text-align: center;
+  border: 0;
   padding: 5px !important;
   min-width: 30px !important;
   max-width: 30px !important;
+  background-color: #eae1c8;
 }
 
 .cart-item .btn-quantity {
@@ -126,11 +277,9 @@ body {
   padding-right: 0;
   border-radius: 0 !important;
   border: 1px solid #333 !important;
-  -webkit-transition: none;
-  transition: none;
 }
 
-.cart-item .btn-action-remove {
+.cart-item .btn-action {
   width: 60px;
   text-align: center;
   padding-left: 0;
@@ -138,14 +287,39 @@ body {
   border: 1px solid #333 !important;
 }
 
-.cart-item .btn-disabled {
-  cursor: not-allowed;
+.container-fluid,
+.book {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
-.splitter {
-  border: 5px solid transparent;
-  overflow-y: auto;
+.text-secondary {
+  color: #cfb991 !important;
+}
+
+.scrollbar {
+  overflow-y: scroll;
   overflow-x: hidden;
+  height: 100%;
+  padding: 0;
+}
+
+.scrollbar-left {
+  height: calc(825px - 149px) !important;
+}
+
+.scrollbar-right {
+  height: calc(100% - 72px);
+}
+
+.splitter-left {
+  z-index: 2;
+  border-right: 1px solid #28241d;
+}
+
+.splitter-right {
+  z-index: 2;
+  border-left: 1px solid #28241d;
 }
 
 .h-90 {
@@ -161,28 +335,178 @@ body {
 }
 
 .shop-bg {
+  overflow: hidden;
+  height: 825px !important;
+  width: 1299px !important;
+  -webkit-box-shadow: 0 0 20px #000000;
+          box-shadow: 0 0 20px #000000;
+  border: 2px solid #28241d;
   background-image: url("/images/store-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  max-height: 866px !important;
-  overflow-y: scroll;
 }
 
 .btn-texture-red {
   background-image: url("/images/btn-texture-red.png");
-  color: white;
+  background-repeat: no-repeat;
+  color: #f1d4cd;
 }
 
 .btn-texture-blue {
   background-image: url("/images/btn-texture-blue.png");
-  color: white;
+  background-repeat: no-repeat;
+  color: #cbdcf0;
 }
 
 .btn-texture-gray {
   background-image: url("/images/btn-texture-blue.png");
   -webkit-filter: grayscale(1);
           filter: grayscale(1);
-  color: white;
+  color: #ffffff;
+}
+
+.btn:hover {
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+#accept,
+#decline {
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
+  -webkit-transition: 0.1s ease;
+  transition: 0.1s ease;
+}
+
+#accept:hover,
+#decline:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#accept {
+  color: #cbdcf0;
+  background-image: url("/images/btn-diablo-blue.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 159px;
+  height: 43px;
+}
+
+#accept:active {
+  background-image: url("/images/btn-diablo-blue-active.png");
+}
+
+#decline {
+  color: #f1d4cd;
+  background-image: url("/images/btn-diablo-red.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 159px;
+  height: 43px;
+}
+
+#decline:active {
+  background-image: url("/images/btn-diablo-red-active.png");
+}
+
+.item-name {
+  color: #ffffff;
+  font-family: "Exocet Blizzard";
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.bottom-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  padding: 14px;
+  background-image: url("/images/bg-messagebox.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  border-top: 1px solid #28241d;
+}
+
+.bottom-bar:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 -6px 16px #000000;
+          box-shadow: 0 -6px 16px #000000;
+}
+
+.bottom-bar .price {
+  font-size: 24px;
+}
+
+.container-fluid {
+  position: relative;
+}
+
+.price {
+  color: #f8cc35;
+}
+
+.price > img {
+  margin-top: 2px;
+}
+
+.book {
+  position: absolute;
+  top: -4px;
+  width: 100%;
+  height: 100%;
+}
+
+.book div {
+  position: relative;
+  height: 900px;
+  width: 1460px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  margin: 0 auto;
+  background-image: url(/images/bg-book.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: drop-shadow(0 0 20px #000000);
+          filter: drop-shadow(0 0 20px #000000);
+}
+
+.background {
+  background-image: url("/images/wallpaper.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+
+.background-wrapper {
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 /*# sourceMappingURL=app.css.map */
