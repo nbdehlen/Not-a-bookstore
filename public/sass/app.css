@@ -145,6 +145,8 @@ body {
   background-color: #252017;
   border-radius: 0;
   border: 1px solid #382f1f;
+  -webkit-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
 }
 
 .modal-content ul li {
