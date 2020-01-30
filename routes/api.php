@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 });*/
 
 
-Route::get('/shop/{item_id}/{amount}', 'ItemController@show');
+Route::get('item/{item_id}/{amount}', 'ItemController@show');
 
 /*
 Route::get('/shop/search', 'ItemController@search');

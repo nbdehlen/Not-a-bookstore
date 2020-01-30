@@ -97,7 +97,7 @@ $(document).ready(function () {
             if (cartItemEl.length === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: `/api/shop/${itemId}/${amount}`,
+                    url: `/api/item/${itemId}/${amount}`,
                     //url: 'items/search',
                     success: function (data) {
                         $('#cart').append(data);
