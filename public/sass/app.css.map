@@ -6,6 +6,7 @@
         "components/_fonts.scss",
         "components/_site.scss",
         "components/_landingpage.scss",
+        "components/_modal.scss",
         "components/_messagebox.scss",
         "components/_search.scss",
         "components/_npc-item.scss",

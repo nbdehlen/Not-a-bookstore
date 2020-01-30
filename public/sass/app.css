@@ -134,6 +134,60 @@ body {
   color: #e9c394;
 }
 
+.modal-header {
+  text-align: center;
+  border-bottom: 1px solid #382f1f;
+  color: #e8dac9;
+}
+
+.modal-content {
+  color: #ffffff;
+  background-color: #252017;
+  border-radius: 0;
+  border: 1px solid #382f1f;
+  -webkit-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content ul li {
+  color: #bc9976;
+}
+
+.modal-footer {
+  border-top: 1px solid #382f1f;
+}
+
+.modal .corner {
+  position: absolute;
+  width: 38px;
+  height: 41px;
+  background: url("/images/box-corners.png") no-repeat;
+  z-index: 3;
+}
+
+.modal .corner.tl {
+  top: -5px;
+  left: -9px;
+}
+
+.modal .corner.tr {
+  top: -5px;
+  right: -9px;
+  background-position: -37px 0;
+}
+
+.modal .corner.bl {
+  bottom: -5px;
+  left: -9px;
+  background-position: 0 -41px;
+}
+
+.modal .corner.br {
+  bottom: -5px;
+  right: -9px;
+  background-position: -37px -41px;
+}
+
 .messagebox {
   position: relative;
   background-image: url("/images/bg-messagebox.jpg");
@@ -394,19 +448,26 @@ body {
 }
 
 #accept,
-#decline {
+#decline,
+.btn-accept,
+.btn-decline {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
   -webkit-transition: 0.1s ease;
   transition: 0.1s ease;
+  background-color: transparent;
+  border: 0;
 }
 
 #accept:hover,
-#decline:hover {
+#decline:hover,
+.btn-accept:hover,
+.btn-decline:hover {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-#accept {
+#accept,
+.btn-accept {
   color: #cbdcf0;
   background-image: url("/images/btn-diablo-blue.png");
   background-repeat: no-repeat;
@@ -415,11 +476,13 @@ body {
   height: 43px;
 }
 
-#accept:active {
+#accept:active,
+.btn-accept:active {
   background-image: url("/images/btn-diablo-blue-active.png");
 }
 
-#decline {
+#decline,
+.btn-decline {
   color: #f1d4cd;
   background-image: url("/images/btn-diablo-red.png");
   background-repeat: no-repeat;
@@ -428,7 +491,8 @@ body {
   height: 43px;
 }
 
-#decline:active {
+#decline:active,
+.btn-decline:active {
   background-image: url("/images/btn-diablo-red-active.png");
 }
 

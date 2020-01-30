@@ -25,6 +25,10 @@ $(document).ready(function () {
 
     let cart = [];
 
+    let totalPrice = 0;
+    let totalPriceEl = document.querySelector('#totalPrice');
+    totalPriceEl.innerHTML = totalPrice;
+
 
     function addValue() {
 
@@ -40,6 +44,8 @@ $(document).ready(function () {
         amount += 1;
         amountEl.val(amount);
         console.log(amount, quantity)
+
+
 
         if (amount >= quantity) {
             $(this).prop('disabled', true);
@@ -81,6 +87,8 @@ $(document).ready(function () {
         let amountEl = itemEl.find('input');
         let priceEl = itemEl.find('.price span');
         let amount = amountEl.val();
+        let itemName = itemEl.find('.item-name').text().trim();
+
         let cartEl = $('body')
             .find('#cart');
 
@@ -97,6 +105,19 @@ $(document).ready(function () {
 
             // console.log(cartEl.find(`[data-id="${itemId}"]`))
             let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+
+            // Add to cart
+            let index = _.findIndex(cart, ["name", itemName]);
+            if (index !== -1) {
+                cart[index]["amount"] += parseInt(amount, 10);
+                console.log(cart[index]["amount"], parseInt(amount, 10))
+            } else {
+                cart.push({
+                    "name": itemName,
+                    "amount": parseInt(amount, 10)
+                });
+            }
+
             if (cartItemEl.length === 0) {
                 $.ajax({
                     type: 'GET',
@@ -126,25 +147,42 @@ $(document).ready(function () {
 
                 cartItemPrice = parseInt(cartItemPrice, 10);
                 price = price * amount;
+
+
+
                 cartItemPriceEl.text(cartItemPrice + price);
+
+
+
+
             }
         }
-
+        // let priceEl = itemEl.find('.price span');
+        let price = priceEl.text();
+        price = parseInt(price, 10);
+        price = price * amount;
+        totalPrice = totalPrice + price;
+        totalPriceEl.innerHTML = totalPrice;
+        console.log(totalPrice);
         amountEl.val(1);
+
     }
 
     function removeHandler() {
         let itemEl = $(this)
             .parents('.cart-item');
+        console.log(itemEl)
         let shopEl = $('body')
             .find('#shop');
-        console.log(shopEl)
         let itemId = itemEl.data('id');
+        console.log(itemId)
         let amount = itemEl.find('input').val();
 
 
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
+        console.log(shopItemEl)
         let shopItemQuantity = shopItemEl.data('quantity');
+        console.log(shopItemQuantity);
         amount = parseInt(amount, 10);
         let newQuantity = shopItemQuantity + amount;
         shopItemEl.data('quantity', newQuantity);
@@ -155,6 +193,10 @@ $(document).ready(function () {
         shopItemQuantityAddBtnEl = shopItemEl.find('.quantity-add');
         $(shopItemQuantityAddBtnEl).prop('disabled', false);
         $(shopItemQuantityAddBtnEl).removeClass('btn-disabled');
+
+        let itemName = itemEl.find('.item-name').text().trim();
+        let index = _.findIndex(cart, ["name", itemName]);
+        cart.splice(index, 1);
 
         itemEl.remove();
     }
@@ -182,7 +224,7 @@ $(document).ready(function () {
         // let amount = itemEl.find('input').val();
 
 
-
+        let totalPriceEl = document.getElementById('totalPrice');
 
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data('quantity');
@@ -197,6 +239,16 @@ $(document).ready(function () {
         price = parseInt(price, 10);
         cartItemPrice = parseInt(cartItemPrice, 10);
         cartItemPriceEl.text(cartItemPrice + price);
+        totalPrice = totalPrice + price;
+        totalPriceEl.innerHTML = totalPrice;
+
+
+        let itemName = itemEl.find('.item-name').text().trim();
+        let index = _.findIndex(cart, ["name", itemName]);
+        if (index !== -1) {
+            cart[index]["amount"] += parseInt(amount, 10);
+        }
+
         if (newQuantity < 0) {
             $(this).prop('disabled', true);
             $(this).addClass('btn-disabled');
@@ -257,6 +309,8 @@ $(document).ready(function () {
         price = parseInt(price, 10);
         cartItemPrice = parseInt(cartItemPrice, 10);
         cartItemPriceEl.text(cartItemPrice - price);
+        totalPrice = totalPrice - price;
+        totalPriceEl.innerHTML = totalPrice;
 
         //
         if (amount <= 1) {
@@ -292,6 +346,17 @@ $(document).ready(function () {
 
     function acceptPurchase() {
         setRandomMessage("accept");
+
+        let dialog = $('#dialog');
+        cart.forEach(item => {
+            dialog.find('ul').append(`<li>${item.name} x ${item.amount}</li>`);
+        });
+        dialog.find('ul').after(`<p class="price text-center">Total cost: ${totalPrice}<img src="https://baby.yoda/images/gold.png" alt="Price" class="ml-1"></p> `);
+        dialog.modal('show')
+
+        cart = [];
+        totalPrice = 0;
+        totalPriceEl.innerHTML = totalPrice;
         $('body')
             .find('#cart')
             .html('');
@@ -299,9 +364,32 @@ $(document).ready(function () {
 
     function declinePurchase() {
         setRandomMessage("decline");
+
+        let itemEl = $(this)
+            .parents('.cart-item');
+        console.log(itemEl)
+        let itemId = itemEl.data('id');
+        console.log(itemId)
+        let amount = itemEl.find('input').val();
+
+        let shopEl = $('body')
+            .find('#shop');
+        let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
+        console.log(shopItemEl);
+        let shopItemQuantity = shopItemEl.data('quantity');
+        console.log(shopItemQuantity);
+        amount = parseInt(amount, 10);
+        let newQuantity = shopItemQuantity + amount;
+        shopItemEl.data('quantity', newQuantity);
+        shopItemEl.attr('data-quantity', newQuantity);
+        shopItemEl.find('.quantity').text(newQuantity);
+        console.log(newQuantity);
+
         $('body')
             .find('#cart')
             .html('');
+        totalPrice = 0;
+        totalPriceEl.innerHTML = totalPrice;
     }
 
 
@@ -355,8 +443,13 @@ $(document).ready(function () {
 
 
 
-
+    // document.getElementById('totalPrice').innerHTML = totalPrice;
     // Loop over list of event handlers and attach events to present elements.
+
+    $('#dialog').on('hidden.bs.modal', (e) => {
+        $(e.target).find('ul').text('');
+        $(e.target).find('p').text('');
+    });
 
     function addListeners() {
         elements.forEach(item => {
