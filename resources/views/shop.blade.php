@@ -16,19 +16,14 @@
                     @component('search')@endcomponent
                 </div>
             </div>
-            <div class="row scrollbar scrollbar-left">
+            <div id="shop" class="row scrollbar scrollbar-left">
                 @foreach ($items as $item)
                     @component('npc_item', ['item' => $item])@endcomponent
                 @endforeach
             </div>
         </div>
         <div class="col-6 splitter-right scrollbar scrollbar-right align-content-between flex-wrap d-flex">
-            <div class="row flex-grow-1 h-50-px align-items-center">
-                {{--
-                    Placeholder cart item
-                    This template should probably be made with javascript or be retrieved with an API call 
-                --}}
-                @component('cart_item', ['item' => $items[0]])@endcomponent
+            <div id="cart" class="row flex-grow-1 h-50-px align-items-center">
             </div>
         </div>
         <div class="bottom-bar col-6 offset-6">
@@ -49,4 +44,4 @@
         </div>
     </div>
 </div>
-        @endsection
+@endsection
