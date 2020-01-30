@@ -1,16 +1,23 @@
 .modal {
     &-header {
-        border-bottom: 0;
+        text-align: center;
+        border-bottom: 1px solid #382f1f;
+        color: #e8dac9;
     }
 
     &-content {
         color: #ffffff;
         background-color: #252017;
         border-radius: 0;
+        border: 1px solid #382f1f;
+
+        ul li {
+            color: #bc9976;
+        }
     }
 
     &-footer {
-        border-top: 0;
+        border-top: 1px solid #382f1f;
     }
 
     .corner {
@@ -26,7 +33,7 @@
         left: -9px;
     }
 
-    .corner.tl {
+    .corner.tr {
         top: -5px;
         right: -9px;
         background-position: -37px 0;

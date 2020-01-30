@@ -83,17 +83,22 @@
 }
 
 #accept,
-#decline {
+#decline,
+.btn-accept,
+.btn-decline {
     // border: 1px solid #28241d;
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
     transition: 0.1s ease;
+    background-color: transparent;
+    border: 0;
 
     &:hover {
         box-shadow: none;
     }
 }
 
-#accept {
+#accept,
+.btn-accept {
     color: #cbdcf0;
     background-image: url("/images/btn-diablo-blue.png");
     // background-size: contain;
@@ -107,7 +112,8 @@
     }
 }
 
-#decline {
+#decline,
+.btn-decline {
     color: #f1d4cd;
     background-image: url("/images/btn-diablo-red.png");
     // background-size: contain;
