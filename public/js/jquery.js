@@ -1,26 +1,24 @@
 $(document).ready(function () {
     $('#search').on('keyup', _.debounce(function (e) {
         // "this" refers to the value in #search  
-        var value = $(this).val();
+        let value = $(this).val();
 
         $.ajax({
             type: 'GET',
-            url: '/items/search',
+            url: 'shop/search',
             data: {
-                search: value,
+             search : value,
             },
 
             success: function (data) {
-                $('#initial_table').hide();
-                $('#ajax').html(data);
+              $('#shop').html(data);
+              addListeners();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR);
             },
         })
     }, 50));
-
-
 
 
     let cart = [];
@@ -100,7 +98,8 @@ $(document).ready(function () {
             if (cartItemEl.length === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: `/items/${itemId}/${amount}`,
+                    url: `/api/item/${itemId}/${amount}`,
+                    //url: 'items/search',
                     success: function (data) {
                         $('#cart').append(data);
                         addListeners();
