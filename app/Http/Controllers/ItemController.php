@@ -16,7 +16,7 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::get();
-        return view('items', compact('items'));
+        return view('shop', compact('items'));
     }
 
     /**
@@ -87,29 +87,21 @@ class ItemController extends Controller
         //
     }
 
-    /*
-    Dynamic search. If the request is ajax, fetch rows from table 'items' where 'name' or 'type' 
-    match the ajax search value. Loop over matching rows and return.
-    */
+    /* Dynamic search */
     public function search(Request $request)
     {
-        if ($request->ajax()) {
-            $output = "";
-            $items = DB::table('items')->where('name', 'LIKE', '%' . $request->search . "%")
-                ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
+            // Get search result from database matching item name or item type
+            $items = Item::where('name', 'LIKE', '%' . $request->search . "%")
+            ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
-            if ($items) {
-                foreach ($items as $key => $item) {
-                    $output .= '<tr>' .
-                        '<td>' . $item->name . '</td>' .
-                        '<td>' . $item->description . '</td>' .
-                        '<td>' . $item->type . '</td>' .
-                        '<td>' . $item->price . '</td>' .
-                        '<td>' . $item->quantity . '</td>' .
-                        '</tr>';
-                }
-                return ($output);
-            }
-        }
+            // if request is type ajax and $items is defined
+            if ($request->ajax() && $items) {
+               foreach ($items as $key => $item) {
+                        return view('npc_items', compact('items'));
+               }
+            } /*else {
+            // if request is not ajax, return json
+               return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
+            }*/
     }
 }
