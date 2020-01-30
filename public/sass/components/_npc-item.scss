@@ -37,4 +37,15 @@
         padding-right: 0;
         border: 1px solid #333 !important;
     }
+
+    &.item-disabled {
+        filter: opacity(0.8);
+        cursor: not-allowed;
+        user-select: none;
+
+        button,
+        input {
+            pointer-events: none;
+        }
+    }
 }
