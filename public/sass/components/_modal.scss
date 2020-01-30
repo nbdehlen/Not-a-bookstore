@@ -1,0 +1,46 @@
+.modal {
+    &-header {
+        border-bottom: 0;
+    }
+
+    &-content {
+        color: #ffffff;
+        background-color: #252017;
+        border-radius: 0;
+    }
+
+    &-footer {
+        border-top: 0;
+    }
+
+    .corner {
+        position: absolute;
+        width: 38px;
+        height: 41px;
+        background: url("/images/box-corners.png") no-repeat;
+        z-index: 3;
+    }
+
+    .corner.tl {
+        top: -5px;
+        left: -9px;
+    }
+
+    .corner.tl {
+        top: -5px;
+        right: -9px;
+        background-position: -37px 0;
+    }
+
+    .corner.bl {
+        bottom: -5px;
+        left: -9px;
+        background-position: 0 -41px;
+    }
+
+    .corner.br {
+        bottom: -5px;
+        right: -9px;
+        background-position: -37px -41px;
+    }
+}

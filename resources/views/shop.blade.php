@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('modal')@endcomponent
+
 <div class="book">
     <div></div>
 </div>
