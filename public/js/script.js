@@ -86,50 +86,6 @@ $(document).ready(() => {
                 addListeners();
             });
         });
-
-        // let itemEl = $(this).parents(".npc-item");
-        // let itemId = itemEl.data("id");
-        // let quantity = itemEl.data("quantity");
-        // let amountEl = itemEl.find("input");
-        // let priceEl = itemEl.find(".price span");
-        // let amount = amountEl.val();
-        // let cartEl = $("body").find("#cart");
-        // if (quantity === 0) {
-        //     itemEl.toggleClass("item-disabled");
-        // }
-        // if (amount <= quantity) {
-        //     let newQuantity = quantity - amount;
-        //     itemEl.data("quantity", newQuantity);
-        //     itemEl.attr("data-quantity", newQuantity);
-        //     itemEl.find(".quantity").text(newQuantity);
-        //     // console.log(cartEl.find(`[data-id="${itemId}"]`))
-        //     let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
-        //     if (cartItemEl.length === 0) {
-        //         // Add item to cart
-        //         _API.trader.addToCart(itemId, amount, data => {
-        //             $("#cart").append(data);
-        //             addListeners();
-        //             if (newQuantity === 0) {
-        //                 itemEl.toggleClass("item-disabled");
-        //             }
-        //         });
-        //     } else {
-        //         let cartItemAmount = cartItemEl.find(".amount").val();
-        //         cartItemAmount = parseInt(cartItemAmount, 10);
-        //         amount = parseInt(amount, 10);
-        //         cartItemEl.find(".amount").val(cartItemAmount + amount);
-        //         let cartItemPriceEl = cartItemEl.find(".price span");
-        //         let cartItemPrice = cartItemPriceEl.text();
-        //         let price = priceEl.text();
-        //         price = parseInt(price, 10);
-        //         cartItemPrice = parseInt(cartItemPrice, 10);
-        //         price = price * amount;
-        //         cartItemPriceEl.text(cartItemPrice + price);
-        //         // Update amount in cart
-        //         _API.trader.addToCart(itemId, amount);
-        //     }
-        // }
-        // amountEl.val(1);
     }
 
     function removeHandler() {
