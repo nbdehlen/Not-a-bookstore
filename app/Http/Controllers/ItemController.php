@@ -90,18 +90,13 @@ class ItemController extends Controller
     /* Dynamic search */
     public function search(Request $request)
     {
-            // Get search result from database matching item name or item type
-            $items = Item::where('name', 'LIKE', '%' . $request->search . "%")
+        // Get search result from database matching item name or item type
+        $items = Item::where('name', 'LIKE', '%' . $request->search . "%")
             ->orWhere('type', 'LIKE', '%' . $request->search . "%")->get();
 
-            // if request is type ajax and $items is defined
-            if ($request->ajax() && $items) {
-               foreach ($items as $key => $item) {
-                        return view('npc_items', compact('items'));
-               }
-            } /*else {
-            // if request is not ajax, return json
-               return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
-            }*/
+        // if request is type ajax and $items is defined
+        if ($request->ajax() && $items) {
+            return view('npc_items', compact('items'));
+        }
     }
 }
