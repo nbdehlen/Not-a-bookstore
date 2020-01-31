@@ -23,36 +23,27 @@ class ItemController extends Controller
         // Get all items
         $items = Item::get();
 
-
         return view('shop', compact('items', 'cart'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id, $amount)
+    // Get specific item
+    public function show($id)
     {
-        $cart = new Cart();
-        $item = $cart->addToCart($id, $amount);
+        $item = Item::where('item_id', $id)->firstOrFail();
 
-        return view('cart_item', compact('item'));
+        return view('npc_item', compact('item'));
     }
 
     /* Dynamic search */
     public function search(Request $request)
     {
         // Get search result from database matching item name or item type
-        $items = new Items();
-        $search = $items->search();
+        $items = new Item();
+        $search = $items->search($request->search);
 
         // if request is type ajax and $items is defined
         if ($request->ajax() && $search) {
-            foreach ($search as $key => $item) {
-                return view('npc_items', compact('search'));
-            }
+            return view('npc_items', ['items' => $search]);
         }
     }
 }

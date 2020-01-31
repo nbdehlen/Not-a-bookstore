@@ -1,27 +1,30 @@
 import _API from "./api.js";
 
 $(document).ready(() => {
-    let cart = [];
-
     function search() {
         let value = $("#search")
             .val()
             .trim();
 
+        // Perform search
         _API.trader.search(value, data => {
             $("#shop").html(data);
             addListeners();
         });
     }
+
+    // Search button click listener
     $(".search button").on("click", () => {
         search();
     });
 
+    // Search button keyup listener
     $("#search").on("keyup", e => {
         if (e.which !== 13) return;
         search();
     });
 
+    // Increment amount value
     function traderAddValue() {
         let amountEl = $(this)
             .parent()
@@ -41,6 +44,7 @@ $(document).ready(() => {
         }
     }
 
+    // Decrement amount value
     function traderSubtractValue() {
         let addBtnEl = $(this)
             .parent()
@@ -61,18 +65,26 @@ $(document).ready(() => {
         addBtnEl.removeClass("btn-disabled");
     }
 
+    // Add
     function addHandler(e) {
         const itemEl = $(this).parents(".npc-item");
         const itemId = itemEl.data("id");
         const amountEl = itemEl.find("input");
         const amount = amountEl.val();
+        const cartEl = $("body").find("#cart");
 
         _API.trader.addToCart(itemId, amount, data => {
-            // $("#cart").append(data);
-            // addListeners();
-            // if (newQuantity === 0) {
-            //     itemEl.toggleClass("item-disabled");
-            // }
+            let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+            if (cartItemEl.length === 0) {
+                $("#cart").append(data);
+            } else {
+                cartItemEl[0].outerHTML = data;
+            }
+
+            _API.trader.getItem(itemId, data => {
+                itemEl[0].outerHTML = data;
+                addListeners();
+            });
         });
 
         // let itemEl = $(this).parents(".npc-item");
@@ -145,25 +157,18 @@ $(document).ready(() => {
     }
 
     function cartAddValue() {
-        //pekar på närmaste input elementet och lagrar det i en variabel
         let amountEl = $(this)
             .parent()
             .parent()
             .find("input");
-        //lagrar value av input elementet i en variabel
+
         let amount = amountEl.val();
-        //omvandlar string till INT
         amount = parseInt(amount, 10);
         amount += 1;
 
-        //hämtar ut en rad som har klassen .cart-item
-        //this är knappen
         let itemEl = $(this).parents(".cart-item");
-        //hämta ut shop, kunde ha varit body, html, w/e
         let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
-        // let amount = itemEl.find('input').val();
-
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data("quantity");
         let newQuantity = shopItemQuantity - 1;
@@ -180,7 +185,6 @@ $(document).ready(() => {
             $(this).prop("disabled", true);
             $(this).addClass("btn-disabled");
         } else {
-            //säger till valuen att den ska plussa på default värdet
             amountEl.val(amount);
             shopItemEl.data("quantity", newQuantity);
             shopItemEl.attr("data-quantity", newQuantity);
@@ -192,26 +196,18 @@ $(document).ready(() => {
     }
 
     function cartSubtractValue() {
-        //pekar på närmaste input elementet och lagrar det i en variabel
         let amountEl = $(this)
             .parent()
             .parent()
             .find("input");
-        //lagrar value av input elementet i en variabel
         let amount = amountEl.val();
-        //omvandlar string till INT
         amount = parseInt(amount, 10);
         amount -= 1;
-        //säger till valuen att den ska plussa på default värdet
         amountEl.val(amount);
 
-        //hämtar ut en rad som har klassen .cart-item
-        //this är knappen
         let itemEl = $(this).parents(".cart-item");
-        //hämta ut shop, kunde ha varit body, html, w/e
         let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
-        // let amount = itemEl.find('input').val();
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data("quantity");
         let newQuantity = shopItemQuantity + 1;
@@ -235,7 +231,6 @@ $(document).ready(() => {
         cartItemPrice = parseInt(cartItemPrice, 10);
         cartItemPriceEl.text(cartItemPrice - price);
 
-        //
         if (amount <= 0) {
             itemEl.remove();
         }
@@ -248,6 +243,7 @@ $(document).ready(() => {
         _API.cart.update(itemId, amount);
     }
 
+    // Eventlisteners
     function addListeners() {
         elements.forEach(item => {
             document.querySelectorAll(item.selector).forEach(elt => {

@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id, $amount)
+    {
+        $cart = new Cart();
+        $item = $cart->addToCart($id, $amount);
+
+        return view('cart_item', compact('item'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @return \Illuminate\Http\Response

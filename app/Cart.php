@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Item;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -40,8 +41,13 @@ class Cart extends Model
             $order->amount = $inventory['quantity'];
         }
 
+        $item['amount'] = $order->amount;
+
         // Save to database
-        $order->save();
+        if ($order->save()) {
+            $itemModel = new Item();
+            $itemModel->setQuantity($id, $inventory['quantity'] - $order->amount);
+        }
 
         return $item;
     }
@@ -61,14 +67,19 @@ class Cart extends Model
             // Get item inventory
             $inventory = $this->getInventory($id);
 
+            $quantity = $inventory['quantity'];
             if ($amount <= $inventory['quantity']) {
                 $order->amount = $amount;
+                $quantity -= $amount;
             } else {
                 $order->amount = $inventory['quantity'];
             }
 
             // Save to database
-            $order->save();
+            if ($order->save()) {
+                $itemModel = new Item();
+                $itemModel->setQuantity($id, $quantity);
+            }
         }
     }
 

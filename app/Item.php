@@ -19,4 +19,12 @@ class Item extends Model
     {
         return $this->belongsTo(\App\Cart::class, 'item_id');
     }
+
+    public function setQuantity($id, $quantity)
+    {
+        $item = $this->where('item_id', $id)->update(['quantity' => $quantity]);
+
+
+        return $item;
+    }
 }

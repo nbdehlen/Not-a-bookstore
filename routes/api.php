@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 */
 
 // Items
-Route::get('item/{item_id}/{amount}', 'ItemController@show');
+Route::get('item/{item_id}', 'ItemController@show');
 
 // Cart
+Route::get('item/{item_id}/{amount}', 'CartController@show');
 Route::patch('cart/{item_id}/{amount}', 'CartController@update');
 Route::delete('cart/{item_id}', 'CartController@destroy');

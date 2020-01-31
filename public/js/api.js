@@ -22,6 +22,25 @@ const _API = {
                 }
             });
         },
+        getItem(itemId, callback = function() {}) {
+            $.ajax({
+                type: "GET",
+                url: `/api/item/${itemId}`,
+                success: function(data) {
+                    callback(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(
+                        "AJAX error: " +
+                            textStatus +
+                            " : " +
+                            errorThrown +
+                            " " +
+                            jqXHR
+                    );
+                }
+            });
+        },
         addToCart(itemId, amount, callback = function() {}) {
             $.ajax({
                 type: "GET",
