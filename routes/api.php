@@ -13,20 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
-
+// Items
 Route::get('item/{item_id}/{amount}', 'ItemController@show');
 
-/*
-Route::get('/shop/search', 'ItemController@search');
-*/
-
-Route::resource(
-    '/', 'SearchController'
-       );
-
-//Route::get('/search' ,'SearchController@index');
-
+// Cart
+Route::patch('cart/{item_id}/{amount}', 'CartController@update');
+Route::delete('cart/{item_id}', 'CartController@destroy');

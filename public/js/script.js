@@ -1,38 +1,28 @@
-$(document).ready(function() {
-    $("#search").on(
-        "keyup",
-        _.debounce(function(e) {
-            // "this" refers to the value in #search
-            let value = $(this).val();
+import _API from "./api.js";
 
-            $.ajax({
-                type: "GET",
-                url: "shop/search",
-                data: {
-                    search: value
-                },
-
-                success: function(data) {
-                    $("#shop").html(data);
-                    addListeners();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
-        }, 50)
-    );
-
+$(document).ready(() => {
     let cart = [];
 
-    function addValue() {
+    function search() {
+        let value = $("#search")
+            .val()
+            .trim();
+
+        _API.trader.search(value, data => {
+            $("#shop").html(data);
+            addListeners();
+        });
+    }
+    $(".search button").on("click", () => {
+        search();
+    });
+
+    $("#search").on("keyup", e => {
+        if (e.which !== 13) return;
+        search();
+    });
+
+    function traderAddValue() {
         let amountEl = $(this)
             .parent()
             .parent()
@@ -40,10 +30,10 @@ $(document).ready(function() {
         let amount = amountEl.val();
         let itemEl = $(this).parents(".npc-item");
         let quantity = itemEl.data("quantity");
+
         amount = parseInt(amount, 10);
         amount += 1;
         amountEl.val(amount);
-        console.log(amount, quantity);
 
         if (amount >= quantity) {
             $(this).prop("disabled", true);
@@ -51,96 +41,88 @@ $(document).ready(function() {
         }
     }
 
-    function subtractValue() {
+    function traderSubtractValue() {
+        let addBtnEl = $(this)
+            .parent()
+            .parent()
+            .find(".quantity-add");
         let amountEl = $(this)
             .parent()
             .parent()
             .find("input");
         let amount = amountEl.val();
+
         amount = parseInt(amount, 10);
         if (amount > 1) {
             amountEl.val(amount - 1);
         }
+
+        addBtnEl.prop("disabled", false);
+        addBtnEl.removeClass("btn-disabled");
     }
 
-    function amountHandler(e) {
-        let amount = $(this).val();
-        amount = parseInt(amount, 10);
-        if (amount < 1) {
-            $(this).val(1);
-        }
-    }
+    function addHandler(e) {
+        const itemEl = $(this).parents(".npc-item");
+        const itemId = itemEl.data("id");
+        const amountEl = itemEl.find("input");
+        const amount = amountEl.val();
 
-    function actionHandler(e) {
-        let itemEl = $(this).parents(".npc-item");
-        let itemId = itemEl.data("id");
-        let quantity = itemEl.data("quantity");
-        let amountEl = itemEl.find("input");
-        let priceEl = itemEl.find(".price span");
-        let amount = amountEl.val();
-        let cartEl = $("body").find("#cart");
+        _API.trader.addToCart(itemId, amount, data => {
+            // $("#cart").append(data);
+            // addListeners();
+            // if (newQuantity === 0) {
+            //     itemEl.toggleClass("item-disabled");
+            // }
+        });
 
-        if (quantity === 0) {
-            itemEl.toggleClass("item-disabled");
-            console.log("voff");
-        }
-
-        if (amount <= quantity) {
-            let newQuantity = quantity - amount;
-            itemEl.data("quantity", newQuantity);
-            itemEl.attr("data-quantity", newQuantity);
-            itemEl.find(".quantity").text(newQuantity);
-
-            // console.log(cartEl.find(`[data-id="${itemId}"]`))
-            let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
-            if (cartItemEl.length === 0) {
-                $.ajax({
-                    type: "GET",
-                    url: `/api/item/${itemId}/${amount}`,
-                    //url: 'items/search',
-                    success: function(data) {
-                        $("#cart").append(data);
-                        addListeners();
-                        if (newQuantity === 0) {
-                            itemEl.toggleClass("item-disabled");
-                            console.log("voff");
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log(
-                            "AJAX error: " +
-                                textStatus +
-                                " : " +
-                                errorThrown +
-                                " " +
-                                jqXHR
-                        );
-                    }
-                });
-            } else {
-                let cartItemAmount = cartItemEl.find(".amount").val();
-                cartItemAmount = parseInt(cartItemAmount, 10);
-                amount = parseInt(amount, 10);
-                cartItemEl.find(".amount").val(cartItemAmount + amount);
-
-                let cartItemPriceEl = cartItemEl.find(".price span");
-                let cartItemPrice = cartItemPriceEl.text();
-                let price = priceEl.text();
-                price = parseInt(price, 10);
-
-                cartItemPrice = parseInt(cartItemPrice, 10);
-                price = price * amount;
-                cartItemPriceEl.text(cartItemPrice + price);
-            }
-        }
-
-        amountEl.val(1);
+        // let itemEl = $(this).parents(".npc-item");
+        // let itemId = itemEl.data("id");
+        // let quantity = itemEl.data("quantity");
+        // let amountEl = itemEl.find("input");
+        // let priceEl = itemEl.find(".price span");
+        // let amount = amountEl.val();
+        // let cartEl = $("body").find("#cart");
+        // if (quantity === 0) {
+        //     itemEl.toggleClass("item-disabled");
+        // }
+        // if (amount <= quantity) {
+        //     let newQuantity = quantity - amount;
+        //     itemEl.data("quantity", newQuantity);
+        //     itemEl.attr("data-quantity", newQuantity);
+        //     itemEl.find(".quantity").text(newQuantity);
+        //     // console.log(cartEl.find(`[data-id="${itemId}"]`))
+        //     let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+        //     if (cartItemEl.length === 0) {
+        //         // Add item to cart
+        //         _API.trader.addToCart(itemId, amount, data => {
+        //             $("#cart").append(data);
+        //             addListeners();
+        //             if (newQuantity === 0) {
+        //                 itemEl.toggleClass("item-disabled");
+        //             }
+        //         });
+        //     } else {
+        //         let cartItemAmount = cartItemEl.find(".amount").val();
+        //         cartItemAmount = parseInt(cartItemAmount, 10);
+        //         amount = parseInt(amount, 10);
+        //         cartItemEl.find(".amount").val(cartItemAmount + amount);
+        //         let cartItemPriceEl = cartItemEl.find(".price span");
+        //         let cartItemPrice = cartItemPriceEl.text();
+        //         let price = priceEl.text();
+        //         price = parseInt(price, 10);
+        //         cartItemPrice = parseInt(cartItemPrice, 10);
+        //         price = price * amount;
+        //         cartItemPriceEl.text(cartItemPrice + price);
+        //         // Update amount in cart
+        //         _API.trader.addToCart(itemId, amount);
+        //     }
+        // }
+        // amountEl.val(1);
     }
 
     function removeHandler() {
         let itemEl = $(this).parents(".cart-item");
         let shopEl = $("body").find("#shop");
-        console.log(shopEl);
         let itemId = itemEl.data("id");
         let amount = itemEl.find("input").val();
 
@@ -153,29 +135,13 @@ $(document).ready(function() {
         shopItemEl.find(".quantity").text(newQuantity);
         shopItemEl.removeClass("item-disabled");
 
-        shopItemQuantityAddBtnEl = shopItemEl.find(".quantity-add");
+        let shopItemQuantityAddBtnEl = shopItemEl.find(".quantity-add");
         $(shopItemQuantityAddBtnEl).prop("disabled", false);
         $(shopItemQuantityAddBtnEl).removeClass("btn-disabled");
 
-        $.ajax({
-            type: "DELETE",
-            url: `/api/cart/${itemId}`,
-            success: function(data) {
-                console.log(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(
-                    "AJAX error: " +
-                        textStatus +
-                        " : " +
-                        errorThrown +
-                        " " +
-                        jqXHR
-                );
-            }
+        _API.cart.delete(itemId, () => {
+            itemEl.remove();
         });
-
-        itemEl.remove();
     }
 
     function cartAddValue() {
@@ -221,23 +187,8 @@ $(document).ready(function() {
             shopItemEl.find(".quantity").text(newQuantity);
         }
 
-        $.ajax({
-            type: "PATCH",
-            url: `/api/cart/${itemId}/${amount}`,
-            success: function(data) {
-                console.log(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(
-                    "AJAX error: " +
-                        textStatus +
-                        " : " +
-                        errorThrown +
-                        " " +
-                        jqXHR
-                );
-            }
-        });
+        // Update cart item
+        _API.cart.update(itemId, amount);
     }
 
     function cartSubtractValue() {
@@ -250,8 +201,9 @@ $(document).ready(function() {
         let amount = amountEl.val();
         //omvandlar string till INT
         amount = parseInt(amount, 10);
+        amount -= 1;
         //säger till valuen att den ska plussa på default värdet
-        amountEl.val(amount - 1);
+        amountEl.val(amount);
 
         //hämtar ut en rad som har klassen .cart-item
         //this är knappen
@@ -260,10 +212,8 @@ $(document).ready(function() {
         let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
         // let amount = itemEl.find('input').val();
-
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data("quantity");
-        amount = parseInt(amount, 10);
         let newQuantity = shopItemQuantity + 1;
 
         let addBtnEl = itemEl.find(".cart-quantity-add");
@@ -286,35 +236,42 @@ $(document).ready(function() {
         cartItemPriceEl.text(cartItemPrice - price);
 
         //
-        if (amount <= 1) {
+        if (amount <= 0) {
             itemEl.remove();
         }
 
         if (newQuantity >= 1) {
             shopItemEl.removeClass("item-disabled");
         }
+
+        // Update cart item
+        _API.cart.update(itemId, amount);
+    }
+
+    function addListeners() {
+        elements.forEach(item => {
+            document.querySelectorAll(item.selector).forEach(elt => {
+                $(elt).off(item.event);
+                $(elt).on(item.event, item.handler);
+            });
+        });
     }
 
     let elements = [
         {
             selector: ".quantity-add",
             event: "click",
-            handler: addValue
+            handler: traderAddValue
         },
         {
             selector: ".quantity-subtract",
             event: "click",
-            handler: subtractValue
-        },
-        {
-            selector: ".amount",
-            event: "input",
-            handler: amountHandler
+            handler: traderSubtractValue
         },
         {
             selector: ".btn-action",
             event: "click",
-            handler: actionHandler
+            handler: addHandler
         },
         {
             selector: ".btn-action-remove",
@@ -333,15 +290,5 @@ $(document).ready(function() {
         }
     ];
 
-    // Loop over list of event handlers and attach events to present elements.
-
-    function addListeners() {
-        elements.forEach(item => {
-            document.querySelectorAll(item.selector).forEach(elt => {
-                $(elt).off(item.event);
-                $(elt).on(item.event, item.handler);
-            });
-        });
-    }
     addListeners();
 });

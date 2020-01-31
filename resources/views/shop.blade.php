@@ -25,6 +25,7 @@
         </div>
         <div class="col-6 splitter-right scrollbar scrollbar-right align-content-between flex-wrap d-flex">
             <div id="cart" class="row flex-grow-1 h-50-px align-items-center">
+                @component('cart_items', ['cart' => $cart])@endcomponent
             </div>
         </div>
         <div class="bottom-bar col-6 offset-6">
