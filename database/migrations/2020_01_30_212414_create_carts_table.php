@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('item_id');
             $table->integer('amount');
+            $table->integer('hist_amount')->default(0);
             $table->timestamps();
             $table->foreign('item_id')
                 ->references('item_id')

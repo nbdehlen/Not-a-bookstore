@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Cart extends Model
 {
     // Modifiable values
-    protected $fillable = ['item_id', 'amount'];
+    protected $fillable = ['item_id', 'amount', 'hist_amount'];
 
     /**
      * Add item from vendor to cart
@@ -24,18 +24,26 @@ class Cart extends Model
         // Insert new or update cart row
         $order = $this->firstOrNew(['item_id' => $id]);
 
+        // Get cart history amount
+        $hist_amount = $this->getHistAmount($id);
+
         // Get item inventory
         $inventory = $this->getInventory($id);
 
         // Verify that amount does not exceed quantity
         if ($item['amount'] <= $inventory['quantity']) {
+
             // Add values of request amount and database amount
             $tmpAmount = $item['amount'] + $inventory['amount'];
 
             // Verify that new amount does not exceed quantity
-            if ($tmpAmount <= $inventory['quantity']) {
+            if ($tmpAmount-$hist_amount <= $inventory['quantity']) {
                 $order->amount = $tmpAmount;
             }
+
+        } else if ($inventory['quantity'] === 0) {
+            $amount == 0;
+
         } else {
             // Set amount equal to quantity if a number greater than quantity was provided
             $order->amount = $inventory['quantity'];
@@ -46,9 +54,12 @@ class Cart extends Model
         // Save to database
         if ($order->save()) {
             $itemModel = new Item();
-            $itemModel->setQuantity($id, $inventory['quantity'] - $order->amount);
+            // Total cart amount minus prior total cart amount
+            $currOrderAmount = $order->amount - $hist_amount;
+            $itemModel->setQuantity($id, $inventory['quantity'] - $currOrderAmount);
         }
 
+        $this->setHistAmount($order->amount, $id);
         return $item;
     }
 
@@ -56,7 +67,8 @@ class Cart extends Model
      * Update cart item amount
      */
     public function updateCart($id, $amount)
-    {
+    {   
+
         if ($amount <= 0) {
             // Remove item from cart if amount is 0 or less
             $this->remove($id);
@@ -66,11 +78,11 @@ class Cart extends Model
 
             // Get item inventory
             $inventory = $this->getInventory($id);
-
             $quantity = $inventory['quantity'];
+
             if ($amount <= $inventory['quantity']) {
                 $order->amount = $amount;
-                $quantity -= $amount;
+                $quantity = -$amount;
             } else {
                 $order->amount = $inventory['quantity'];
             }
@@ -107,6 +119,23 @@ class Cart extends Model
         return DB::table('carts')
             ->join('items', 'carts.item_id', '=', 'items.item_id')
             ->get();
+    }
+
+    // Get prior amount of item in cart
+    public function getHistAmount($id)
+    {
+            $query = Cart::where('item_id', $id)->first();
+
+            if ($query === null) {
+                return 0;
+            }
+            return $query->hist_amount;
+    }
+
+    // Update total amount of item in cart
+    public function setHistAmount($updateHistoryCart, $id)
+    {
+        Cart::where('item_id', $id)->update(['hist_amount' => $updateHistoryCart]);
     }
 
     /**
