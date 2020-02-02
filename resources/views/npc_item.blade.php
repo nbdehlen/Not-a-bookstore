@@ -26,7 +26,7 @@
         <div class="col d-flex align-items-center mr-2">
             <div class="input-group input-group-sm justify-content-center justify-content-sm-end">
                 <div class="input-group-btn">
-                    <button class="btn btn-sm btn-quantity btn-texture-gray quantity-subtract" type="button">-</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray quantity-subtract" type="button" {{ $item->quantity <= 1 ? 'disabled' : '' }}>-</button>
                 </div>
                 <input type="text" class="amount form-control" value="1" pattern="[0-9]{1,2}" disabled>
                 <div class="input-group-btn mr-1">
