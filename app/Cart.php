@@ -27,6 +27,7 @@ class Cart extends Model
         // Get item inventory
         $inventory = $this->getInventory($id);
 
+        $quantity = $inventory['quantity'];
         // Verify that amount does not exceed quantity
         if ($item['amount'] <= $inventory['quantity']) {
             // Add values of request amount and database amount
@@ -35,10 +36,15 @@ class Cart extends Model
             // Verify that new amount does not exceed quantity
             if ($tmpAmount <= $inventory['quantity']) {
                 $order->amount = $tmpAmount;
+                $quantity = $inventory['quantity'] - $order->amount;
+            } else {
+                $order->amount = $inventory['amount'] + $inventory['quantity'];
+                $quantity = 0;
             }
         } else {
             // Set amount equal to quantity if a number greater than quantity was provided
             $order->amount = $inventory['quantity'];
+            $quantity = 0;
         }
 
         $item['amount'] = $order->amount;
@@ -46,7 +52,7 @@ class Cart extends Model
         // Save to database
         if ($order->save()) {
             $itemModel = new Item();
-            $itemModel->setQuantity($id, $inventory['quantity'] - $order->amount);
+            $itemModel->setQuantity($id, $quantity);
         }
 
         return $item;
@@ -79,8 +85,16 @@ class Cart extends Model
                     $quantity += 1;
                 }
             } else {
-                $order->amount = $inventory['quantity'];
-                $quantity = 0;
+                // This part has an issue, gotta fix it!
+
+                if ($amount > $inventory['amount']) {
+                    // Set cart amount equal to vendor item quantity plus cart amount from db
+                    $order->amount = $inventory['quantity'] + $inventory['amount'];
+                    $quantity = 0;
+                } else {
+                    $order->amount -= 1;
+                    $quantity += 1;
+                }
             }
 
             // Save to database
