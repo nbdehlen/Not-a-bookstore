@@ -33,11 +33,12 @@ class Cart extends Model
             // Add values of request amount and database amount
             $tmpAmount = $item['amount'] + $inventory['amount'];
 
-            // Verify that new amount does not exceed quantity
-            if ($tmpAmount <= $inventory['quantity']) {
+            // Verify that amount does not exceed quantity
+            if ($item['amount'] <= $inventory['quantity']) {
                 $order->amount = $tmpAmount;
-                $quantity = $inventory['quantity'] - $order->amount;
+                $quantity -= $item['amount'];
             } else {
+                // Set amount equal to database cart amount & vendor item quantity
                 $order->amount = $inventory['amount'] + $inventory['quantity'];
                 $quantity = 0;
             }
