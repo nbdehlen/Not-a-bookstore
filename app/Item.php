@@ -22,9 +22,6 @@ class Item extends Model
 
     public function setQuantity($id, $quantity)
     {
-        $item = $this->where('item_id', $id)->update(['quantity' => $quantity]);
-
-
-        return $item;
+        return $this->where('item_id', $id)->update(['quantity' => $quantity]);
     }
 }

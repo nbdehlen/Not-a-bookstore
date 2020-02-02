@@ -18,7 +18,7 @@ class Cart extends Model
     {
         // Get item matching ID or throw error
         $item = Item::where('item_id', $id)->firstOrFail();
-        // Add amount to item object      
+        // Add amount to item object
         $item['amount'] = (int) $amount;
 
         // Insert new or update cart row
@@ -69,10 +69,18 @@ class Cart extends Model
 
             $quantity = $inventory['quantity'];
             if ($amount <= $inventory['quantity']) {
-                $order->amount = $amount;
-                $quantity -= $amount;
+                if ($amount > $inventory['amount']) {
+                    // Increase cart amount by one and decrease vendor quantity by one
+                    $order->amount += 1;
+                    $quantity -= 1;
+                } else {
+                    // Decrease cart amount by one and increase vendor quantity by one
+                    $order->amount -= 1;
+                    $quantity += 1;
+                }
             } else {
                 $order->amount = $inventory['quantity'];
+                $quantity = 0;
             }
 
             // Save to database
@@ -114,7 +122,22 @@ class Cart extends Model
      */
     public function remove($id)
     {
-        return $this->where('item_id', $id)->firstOrFail()->delete();
+        // Get item inventory
+        $inventory = $this->getInventory($id);
+
+        // Add quantity and amount
+        $amount = $inventory['quantity'] + $inventory['amount'];
+
+        // Delete item from cart
+        $response = $this->where('item_id', $id)->firstOrFail()->delete();
+
+        if ($response) {
+            // Add item amount from cart back to item stock quantity
+            $itemModel = new Item();
+            $itemModel->setQuantity($id, $amount);
+        }
+
+        return $response;
     }
 
     public function item()

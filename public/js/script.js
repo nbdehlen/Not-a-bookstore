@@ -24,6 +24,8 @@ $(document).ready(() => {
         search();
     });
 
+    function addToCart() {}
+
     // Increment amount value
     function traderAddValue() {
         let amountEl = $(this)
@@ -66,7 +68,7 @@ $(document).ready(() => {
     }
 
     // Add
-    function addHandler(e) {
+    function addToCartHandler(e) {
         const itemEl = $(this).parents(".npc-item");
         const itemId = itemEl.data("id");
         const amountEl = itemEl.find("input");
@@ -88,7 +90,7 @@ $(document).ready(() => {
         });
     }
 
-    function removeHandler() {
+    function removeFromCartHandler() {
         let itemEl = $(this).parents(".cart-item");
         let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
@@ -223,12 +225,12 @@ $(document).ready(() => {
         {
             selector: ".btn-action",
             event: "click",
-            handler: addHandler
+            handler: addToCartHandler
         },
         {
             selector: ".btn-action-remove",
             event: "click",
-            handler: removeHandler
+            handler: removeFromCartHandler
         },
         {
             selector: ".cart-quantity-add",

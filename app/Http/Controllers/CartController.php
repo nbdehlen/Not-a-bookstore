@@ -40,7 +40,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        Cart::where('item_id', $id)->firstOrFail()->delete();
+        $cart = new Cart();
+        $cart->remove($id);
 
         return;
     }
