@@ -29,14 +29,16 @@ class Cart extends Model
 
         $quantity = $inventory['quantity'];
         // Verify that amount does not exceed quantity
-        if ($item['amount'] <= $inventory['quantity']) {
+        if ($item['amount'] <= $quantity) {
             // Add values of request amount and database amount
             $order->amount = $item['amount'] + $inventory['amount'];
             $quantity -= $item['amount'];
         } else {
-            // Set amount equal to quantity if a number greater than quantity was provided
-            $order->amount = $inventory['quantity'];
-            $quantity = 0;
+            if ($quantity !== 0) {
+                // Set amount equal to quantity if a number greater than quantity was provided
+                $order->amount = $quantity;
+                $quantity = 0;
+            }
         }
 
         $item['amount'] = $order->amount;

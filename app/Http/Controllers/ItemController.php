@@ -24,7 +24,6 @@ class ItemController extends Controller
         // Get all items
         $items = Item::get();
 
-
         return view('shop', compact('items', 'cart', 'sum'));
     }
 
