@@ -31,7 +31,7 @@
         <div class="bottom-bar col-6 offset-6">
             <div class="row justify-content-center">
                 <div class="col-auto">
-                    <button id="accept" class="btn btn-texture-blue exocet" type="button">Accept</button>
+                    <button id="accept" class="btn btn-texture-blue exocet" type="button" {{ $sum <= 0 ? 'disabled' : '' }}>Accept</button>
                 </div>
                 <div class="col-auto">
                     <p  class="price mb-0 d-flex align-items-center justify-content-sm-center">
@@ -40,7 +40,7 @@
                     </p>
                 </div>
                 <div class="col-auto">
-                    <button id="decline" class="btn btn-texture-red exocet" type="button">Decline</button>
+                    <button id="decline" class="btn btn-texture-red exocet" type="button" {{ $sum <= 0 ? 'disabled' : '' }}>Decline</button>
                 </div>
             </div>
         </div>

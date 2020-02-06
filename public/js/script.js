@@ -2,6 +2,11 @@ import _API from "./api.js";
 import npcMessages from "./npc-messages.js";
 
 $(document).ready(() => {
+    const shopEl = $("body").find("#shop");
+    const cartEl = $("body").find("#cart");
+    const sumEl = $("#totalPrice");
+    let _sum = 0;
+
     function searchHandler() {
         let value = $("#search")
             .val()
@@ -61,7 +66,6 @@ $(document).ready(() => {
         const itemId = itemEl.data("id");
         const amountEl = itemEl.find("input");
         const amount = amountEl.val();
-        const cartEl = $("body").find("#cart");
 
         _API.trader.addToCart(itemId, amount, data => {
             let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
@@ -75,12 +79,18 @@ $(document).ready(() => {
                 itemEl[0].outerHTML = data;
                 addListeners();
             });
+
+            updateSum();
         });
+    }
+
+    function disableCartButtons(toggle) {
+        $("#accept").prop("disabled", toggle);
+        $("#decline").prop("disabled", toggle);
     }
 
     function removeFromCartHandler() {
         let itemEl = $(this).parents(".cart-item");
-        let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
         let amount = itemEl.find("input").val();
 
@@ -99,6 +109,7 @@ $(document).ready(() => {
 
         _API.cart.delete(itemId, () => {
             itemEl.remove();
+            updateSum();
         });
     }
 
@@ -113,13 +124,11 @@ $(document).ready(() => {
         amount += 1;
 
         let itemEl = $(this).parents(".cart-item");
-        let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data("quantity");
         let newQuantity = shopItemQuantity - 1;
         let priceEl = shopItemEl.find(".price span");
-        let cartEl = $("body").find("#cart");
         let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
         let cartItemPriceEl = cartItemEl.find(".price span");
         let cartItemPrice = cartItemPriceEl.text();
@@ -138,7 +147,7 @@ $(document).ready(() => {
         }
 
         // Update cart item
-        _API.cart.update(itemId, amount);
+        _API.cart.update(itemId, amount, () => updateSum());
     }
 
     function cartSubtractValueHandler() {
@@ -152,7 +161,6 @@ $(document).ready(() => {
         amountEl.val(amount);
 
         let itemEl = $(this).parents(".cart-item");
-        let shopEl = $("body").find("#shop");
         let itemId = itemEl.data("id");
         let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
         let shopItemQuantity = shopItemEl.data("quantity");
@@ -168,7 +176,6 @@ $(document).ready(() => {
 
         // Reduce price when substracting an item from the cart
         let priceEl = shopItemEl.find(".price span");
-        let cartEl = $("body").find("#cart");
         let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
         let cartItemPriceEl = cartItemEl.find(".price span");
         let cartItemPrice = cartItemPriceEl.text();
@@ -186,20 +193,44 @@ $(document).ready(() => {
         }
 
         // Update cart item
-        _API.cart.update(itemId, amount);
+        _API.cart.update(itemId, amount, () => updateSum());
     }
 
     function acceptPurchaseHandler() {
+        updateSum();
+
         $("#dialog").modal("show");
-        $("body")
-            .find("#cart")
-            .html("");
     }
 
     function declinePurchaseHandler() {
+        updateSum();
+
         // Clear cart
         _API.cart.clear(data => {
-            if (data == 1) setRandomMessage("decline");
+            if (data != 1) {
+                alert("An error occured when declining the purchase");
+            } else {
+                $("body")
+                    .find("#cart")
+                    .html("");
+                setRandomMessage("decline");
+                updateSum();
+            }
+        });
+    }
+
+    // Get random vendor response message by type
+    function setRandomMessage(type) {
+        const messages = npcMessages;
+        const randomIndex = Math.floor(Math.random() * messages[type].length);
+        $(".messagebox-message").text(messages[type][randomIndex]);
+    }
+
+    // Update total cost
+    function updateSum() {
+        _API.cart.sum(data => {
+            sumEl.text(data.sum);
+            disableCartButtons(data.sum === 0);
         });
     }
 
@@ -213,19 +244,12 @@ $(document).ready(() => {
         });
     }
 
-    // Get random vendor response message by type
-    function setRandomMessage(type) {
-        const messages = npcMessages;
-        const randomIndex = Math.floor(Math.random() * messages[type].length);
-        $(".messagebox-message").text(messages[type][randomIndex]);
-    }
-
     // Modal on show
     $("#dialog").on("show.bs.modal", e => {
         // Get cart content
         _API.cart.get(data => {
             if (!data.cart) {
-                console.log("Error!");
+                alert("An error occured when accepting the purchase");
             } else {
                 data.cart.forEach(item => {
                     $(e.target)
@@ -238,7 +262,15 @@ $(document).ready(() => {
                 });
                 setRandomMessage("accept");
                 // Clear cart
-                _API.cart.clear();
+                _API.cart.clear(data => {
+                    if (data != 1) {
+                        alert("An error occured when clearing the cart");
+                    } else {
+                        $("body")
+                            .find("#cart")
+                            .html("");
+                    }
+                });
             }
         });
     });

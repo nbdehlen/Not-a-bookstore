@@ -81,6 +81,25 @@ const _API = {
                 }
             });
         },
+        sum(callback = function() {}) {
+            $.ajax({
+                type: "GET",
+                url: "/api/cart/sum",
+                success: function(data) {
+                    callback(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(
+                        "AJAX error: " +
+                            textStatus +
+                            " : " +
+                            errorThrown +
+                            " " +
+                            jqXHR
+                    );
+                }
+            });
+        },
         update(itemId, amount, callback = function() {}) {
             $.ajax({
                 type: "PATCH",

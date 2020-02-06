@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('item/{item_id}', 'ItemController@show');
 
 // Cart
+Route::get('cart/sum', 'CartController@sum');
 Route::get('cart', 'CartController@index');
 Route::get('item/{item_id}/{amount}', 'CartController@show');
 Route::patch('cart/{item_id}/{amount}', 'CartController@update');

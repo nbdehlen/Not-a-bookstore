@@ -59,6 +59,18 @@ class CartController extends Controller
     }
 
     /**
+     * Get sum of cart items.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sum()
+    {
+        $cart = new Cart();
+        $sum = $cart->getSum() ?? 0;
+        return compact('sum');
+    }
+
+    /**
      * Remove all resources from storage.
      *
      * @return \Illuminate\Http\Response
