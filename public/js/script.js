@@ -5,7 +5,6 @@ $(document).ready(() => {
     const shopEl = $("body").find("#shop");
     const cartEl = $("body").find("#cart");
     const sumEl = $("#totalPrice");
-    let _sum = 0;
 
     function searchHandler() {
         let value = $("#search")
@@ -14,7 +13,7 @@ $(document).ready(() => {
 
         // Perform search
         _API.trader.search(value, data => {
-            $("#shop").html(data);
+            shopEl.html(data);
             addListeners();
         });
     }
@@ -90,12 +89,12 @@ $(document).ready(() => {
     }
 
     function removeFromCartHandler() {
-        let itemEl = $(this).parents(".cart-item");
-        let itemId = itemEl.data("id");
+        const itemEl = $(this).parents(".cart-item");
+        const itemId = itemEl.data("id");
         let amount = itemEl.find("input").val();
 
-        let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
-        let shopItemQuantity = shopItemEl.data("quantity");
+        const shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
+        const shopItemQuantity = shopItemEl.data("quantity");
         amount = parseInt(amount, 10);
         let newQuantity = shopItemQuantity + amount;
         shopItemEl.data("quantity", newQuantity);
@@ -103,7 +102,7 @@ $(document).ready(() => {
         shopItemEl.find(".quantity").text(newQuantity);
         shopItemEl.removeClass("item-disabled");
 
-        let shopItemQuantityAddBtnEl = shopItemEl.find(".quantity-add");
+        const shopItemQuantityAddBtnEl = shopItemEl.find(".quantity-add");
         $(shopItemQuantityAddBtnEl).prop("disabled", false);
         $(shopItemQuantityAddBtnEl).removeClass("btn-disabled");
 
@@ -114,7 +113,7 @@ $(document).ready(() => {
     }
 
     function cartAddValueHandler() {
-        let amountEl = $(this)
+        const amountEl = $(this)
             .parent()
             .parent()
             .find("input");
@@ -123,14 +122,14 @@ $(document).ready(() => {
         amount = parseInt(amount, 10);
         amount += 1;
 
-        let itemEl = $(this).parents(".cart-item");
-        let itemId = itemEl.data("id");
-        let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
-        let shopItemQuantity = shopItemEl.data("quantity");
+        const itemEl = $(this).parents(".cart-item");
+        const itemId = itemEl.data("id");
+        const shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
+        const shopItemQuantity = shopItemEl.data("quantity");
         let newQuantity = shopItemQuantity - 1;
-        let priceEl = shopItemEl.find(".price span");
-        let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
-        let cartItemPriceEl = cartItemEl.find(".price span");
+        const priceEl = shopItemEl.find(".price span");
+        const cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+        const cartItemPriceEl = cartItemEl.find(".price span");
         let cartItemPrice = cartItemPriceEl.text();
         let price = priceEl.text();
         price = parseInt(price, 10);
@@ -151,7 +150,7 @@ $(document).ready(() => {
     }
 
     function cartSubtractValueHandler() {
-        let amountEl = $(this)
+        const amountEl = $(this)
             .parent()
             .parent()
             .find("input");
@@ -160,13 +159,13 @@ $(document).ready(() => {
         amount -= 1;
         amountEl.val(amount);
 
-        let itemEl = $(this).parents(".cart-item");
-        let itemId = itemEl.data("id");
-        let shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
-        let shopItemQuantity = shopItemEl.data("quantity");
+        const itemEl = $(this).parents(".cart-item");
+        const itemId = itemEl.data("id");
+        const shopItemEl = shopEl.find(`[data-id="${itemId}"]`);
+        const shopItemQuantity = shopItemEl.data("quantity");
         let newQuantity = shopItemQuantity + 1;
 
-        let addBtnEl = itemEl.find(".cart-quantity-add");
+        const addBtnEl = itemEl.find(".cart-quantity-add");
         addBtnEl.removeClass("btn-disabled");
         addBtnEl.prop("disabled", false);
 
@@ -175,9 +174,9 @@ $(document).ready(() => {
         shopItemEl.find(".quantity").text(newQuantity);
 
         // Reduce price when substracting an item from the cart
-        let priceEl = shopItemEl.find(".price span");
-        let cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
-        let cartItemPriceEl = cartItemEl.find(".price span");
+        const priceEl = shopItemEl.find(".price span");
+        const cartItemEl = cartEl.find(`[data-id="${itemId}"]`);
+        const cartItemPriceEl = cartItemEl.find(".price span");
         let cartItemPrice = cartItemPriceEl.text();
         let price = priceEl.text();
         price = parseInt(price, 10);
@@ -197,14 +196,10 @@ $(document).ready(() => {
     }
 
     function acceptPurchaseHandler() {
-        updateSum();
-
         $("#dialog").modal("show");
     }
 
     function declinePurchaseHandler() {
-        updateSum();
-
         // Clear cart
         _API.cart.clear(data => {
             if (data != 1) {
@@ -215,6 +210,12 @@ $(document).ready(() => {
                     .html("");
                 setRandomMessage("decline");
                 updateSum();
+
+                // Restock vendor
+                _API.trader.search("", data => {
+                    shopEl.html(data);
+                    addListeners();
+                });
             }
         });
     }
@@ -269,7 +270,14 @@ $(document).ready(() => {
                         $("body")
                             .find("#cart")
                             .html("");
+                        updateSum();
                     }
+
+                    // Restock vendor
+                    _API.trader.search("", data => {
+                        shopEl.html(data);
+                        addListeners();
+                    });
                 });
             }
         });
