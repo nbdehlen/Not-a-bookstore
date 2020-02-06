@@ -21,7 +21,7 @@
                 </div>
                 <input type="text" class="amount form-control" value="{{ $item->amount ?? 1 }}" pattern="[0-9]{1,2}" disabled>
                 <div class="input-group-btn mr-1">
-                    <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-add" type="button">+</button>
+                    <button class="btn btn-sm btn-quantity btn-texture-gray cart-quantity-add" type="button" {{ $item->amount >= $item->amount + $item->quantity ? 'disabled' : '' }}>+</button>
                 </div>
                 <div class="input-group-btn">
                     <button class="btn btn-sm btn-texture-red btn-action-remove" type="button">Remove</button>

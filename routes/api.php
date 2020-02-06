@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,20 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
+// Items
+Route::get('item/{item_id}', 'ItemController@show');
 
-
-Route::get('item/{item_id}/{amount}', 'ItemController@show');
-
-/*
-Route::get('/shop/search', 'ItemController@search');
-*/
-
-Route::resource(
-    '/', 'SearchController'
-       );
-
-//Route::get('/search' ,'SearchController@index');
-
+// Cart
+Route::get('cart/sum', 'CartController@sum');
+Route::get('cart', 'CartController@index');
+Route::get('item/{item_id}/{amount}', 'CartController@show');
+Route::patch('cart/{item_id}/{amount}', 'CartController@update');
+Route::delete('cart/{item_id}', 'CartController@destroy');
+Route::delete('cart', 'CartController@clear');

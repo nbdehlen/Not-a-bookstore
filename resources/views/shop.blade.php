@@ -25,23 +25,22 @@
         </div>
         <div class="col-6 splitter-right scrollbar scrollbar-right align-content-between flex-wrap d-flex">
             <div id="cart" class="row flex-grow-1 h-50-px align-items-center">
+                @component('cart_items', ['cart' => $cart])@endcomponent
             </div>
         </div>
         <div class="bottom-bar col-6 offset-6">
             <div class="row justify-content-center">
                 <div class="col-auto">
-                    <button id="accept" class="btn btn-texture-blue exocet" type="button">Accept</button>
+                    <button id="accept" class="btn btn-texture-blue exocet" type="button" {{ $sum <= 0 ? 'disabled' : '' }}>Accept</button>
                 </div>
                 <div class="col-auto">
                     <p  class="price mb-0 d-flex align-items-center justify-content-sm-center">
-                        <span id="totalPrice">0</span>
-
-
+                        <span id="totalPrice">{{ $sum ?? '0' }}</span>
                         <img src="{{ asset("images/gold.png") }}" class="ml-1" alt="Price">
                     </p>
                 </div>
                 <div class="col-auto">
-                    <button id="decline" class="btn btn-texture-red exocet" type="button">Decline</button>
+                    <button id="decline" class="btn btn-texture-red exocet" type="button" {{ $sum <= 0 ? 'disabled' : '' }}>Decline</button>
                 </div>
             </div>
         </div>

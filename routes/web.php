@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,15 +13,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
-//Route::get('/items/{item_id}/{amount}', 'ItemController@show');
-
+Route::get('/shop', 'ItemController@index');
 Route::get('/shop/search', 'ItemController@search');
-
-Route::resources([
-  //  'items' => 'ItemController',
-  //  'shop' => 'ShopController'
-  'shop' => 'ItemController'
-]);

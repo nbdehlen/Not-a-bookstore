@@ -376,11 +376,10 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
-  padding: 0;
 }
 
 .scrollbar-left {
-  height: calc(825px - 149px) !important;
+  height: calc(821px - 149px) !important;
 }
 
 .scrollbar-right {
@@ -439,6 +438,11 @@ body {
   -webkit-filter: grayscale(1);
           filter: grayscale(1);
   color: #ffffff;
+}
+
+.btn {
+  background-color: transparent;
+  border: 0;
 }
 
 .btn:hover {

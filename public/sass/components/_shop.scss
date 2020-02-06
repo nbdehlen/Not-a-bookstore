@@ -8,14 +8,12 @@
 }
 
 .scrollbar {
-    // border: 5px solid transparent;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100%;
-    padding: 0;
 
     &-left {
-        height: calc(825px - 149px) !important;
+        height: calc(821px - 149px) !important;
     }
 
     &-right {
@@ -179,7 +177,7 @@
     color: #f8cc35;
 }
 
-.price>img {
+.price > img {
     margin-top: 2px;
 }
 
