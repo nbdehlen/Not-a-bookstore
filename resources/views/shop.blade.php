@@ -34,8 +34,8 @@
                     <button id="accept" class="btn btn-texture-blue exocet" type="button">Accept</button>
                 </div>
                 <div class="col-auto">
-                    <p class="price mb-0 d-flex align-items-center justify-content-sm-center">
-                        500
+                    <p  class="price mb-0 d-flex align-items-center justify-content-sm-center">
+                        <span id="totalPrice">{{ $sum ?? '0' }}</span>
                         <img src="{{ asset("images/gold.png") }}" class="ml-1" alt="Price">
                     </p>
                 </div>

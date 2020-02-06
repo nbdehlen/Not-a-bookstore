@@ -62,6 +62,25 @@ const _API = {
         }
     },
     cart: {
+        get(callback = function() {}) {
+            $.ajax({
+                type: "GET",
+                url: "/api/cart",
+                success: function(data) {
+                    callback(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(
+                        "AJAX error: " +
+                            textStatus +
+                            " : " +
+                            errorThrown +
+                            " " +
+                            jqXHR
+                    );
+                }
+            });
+        },
         update(itemId, amount, callback = function() {}) {
             $.ajax({
                 type: "PATCH",
@@ -85,6 +104,25 @@ const _API = {
             $.ajax({
                 type: "DELETE",
                 url: `/api/cart/${itemId}`,
+                success: function(data) {
+                    callback(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(
+                        "AJAX error: " +
+                            textStatus +
+                            " : " +
+                            errorThrown +
+                            " " +
+                            jqXHR
+                    );
+                }
+            });
+        },
+        clear(callback = function() {}) {
+            $.ajax({
+                type: "DELETE",
+                url: "/api/cart",
                 success: function(data) {
                     callback(data);
                 },

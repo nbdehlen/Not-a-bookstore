@@ -15,13 +15,18 @@ class Item extends Model
             ->orWhere('type', 'LIKE', '%' . $term . "%")->get();
     }
 
-    public function cart()
+    public function incrementQuantity($id, $quantity)
     {
-        return $this->belongsTo(\App\Cart::class, 'item_id');
+        return $this->where('item_id', $id)->increment('quantity', $quantity);
     }
 
     public function setQuantity($id, $quantity)
     {
         return $this->where('item_id', $id)->update(['quantity' => $quantity]);
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo(\App\Cart::class, 'item_id');
     }
 }

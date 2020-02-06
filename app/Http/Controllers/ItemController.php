@@ -18,12 +18,14 @@ class ItemController extends Controller
     {
         // Get all items from cart
         $cart = new Cart();
+        $sum = $cart->getSum();
         $cart = $cart->getAllItems();
 
         // Get all items
         $items = Item::get();
 
-        return view('shop', compact('items', 'cart'));
+
+        return view('shop', compact('items', 'cart', 'sum'));
     }
 
     // Get specific item

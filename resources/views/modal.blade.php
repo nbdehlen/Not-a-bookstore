@@ -12,6 +12,9 @@
                     @endforeach
                 @endisset
             </ul>
+            <p class="price text-center">
+                Total cost: <span></span><img src="{{ asset("images/gold.png") }}" alt="Price" class="ml-1">
+            </p>
         </div>
         <div class="modal-footer justify-content-center">
             <button type="button" class="btn-accept text-uppercase exocet" data-dismiss="modal">Ok</button>

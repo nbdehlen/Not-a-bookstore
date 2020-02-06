@@ -124,6 +124,18 @@ class Cart extends Model
     }
 
     /**
+     * Get price sum of cart items
+     */
+    public function getSum()
+    {
+        return DB::table('carts')
+            ->select(DB::raw('SUM(price * amount) as sum'))
+            ->join('items', 'carts.item_id', '=', 'items.item_id')
+            ->first()
+            ->sum;
+    }
+
+    /**
      * Remove item from cart
      */
     public function remove($id)
@@ -144,6 +156,23 @@ class Cart extends Model
         }
 
         return $response;
+    }
+
+    /**
+     * Clear cart
+     */
+    public function clear()
+    {
+        $itemModel = new Item();
+        // Get cart items
+        $inventory = $this->getAllItems();
+
+        // Add quantity back to vendor
+        foreach ($inventory as $item) {
+            $itemModel->incrementQuantity($item->item_id, $item->amount);
+        }
+
+        return $this->query()->delete();
     }
 
     public function item()

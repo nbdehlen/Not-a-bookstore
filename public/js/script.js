@@ -1,7 +1,8 @@
 import _API from "./api.js";
+import npcMessages from "./npc-messages.js";
 
 $(document).ready(() => {
-    function search() {
+    function searchHandler() {
         let value = $("#search")
             .val()
             .trim();
@@ -13,21 +14,8 @@ $(document).ready(() => {
         });
     }
 
-    // Search button click listener
-    $(".search button").on("click", () => {
-        search();
-    });
-
-    // Search button keyup listener
-    $("#search").on("keyup", e => {
-        if (e.which !== 13) return;
-        search();
-    });
-
-    function addToCart() {}
-
     // Increment amount value
-    function traderAddValue() {
+    function traderAddValueHandler() {
         let amountEl = $(this)
             .parent()
             .parent()
@@ -47,7 +35,7 @@ $(document).ready(() => {
     }
 
     // Decrement amount value
-    function traderSubtractValue() {
+    function traderSubtractValueHandler() {
         let addBtnEl = $(this)
             .parent()
             .parent()
@@ -67,7 +55,7 @@ $(document).ready(() => {
         addBtnEl.removeClass("btn-disabled");
     }
 
-    // Add
+    // Add to cart
     function addToCartHandler(e) {
         const itemEl = $(this).parents(".npc-item");
         const itemId = itemEl.data("id");
@@ -114,7 +102,7 @@ $(document).ready(() => {
         });
     }
 
-    function cartAddValue() {
+    function cartAddValueHandler() {
         let amountEl = $(this)
             .parent()
             .parent()
@@ -153,7 +141,7 @@ $(document).ready(() => {
         _API.cart.update(itemId, amount);
     }
 
-    function cartSubtractValue() {
+    function cartSubtractValueHandler() {
         let amountEl = $(this)
             .parent()
             .parent()
@@ -201,6 +189,20 @@ $(document).ready(() => {
         _API.cart.update(itemId, amount);
     }
 
+    function acceptPurchaseHandler() {
+        $("#dialog").modal("show");
+        $("body")
+            .find("#cart")
+            .html("");
+    }
+
+    function declinePurchaseHandler() {
+        // Clear cart
+        _API.cart.clear(data => {
+            if (data == 1) setRandomMessage("decline");
+        });
+    }
+
     // Eventlisteners
     function addListeners() {
         elements.forEach(item => {
@@ -211,16 +213,66 @@ $(document).ready(() => {
         });
     }
 
-    let elements = [
+    // Get random vendor response message by type
+    function setRandomMessage(type) {
+        const messages = npcMessages;
+        const randomIndex = Math.floor(Math.random() * messages[type].length);
+        $(".messagebox-message").text(messages[type][randomIndex]);
+    }
+
+    // Modal on show
+    $("#dialog").on("show.bs.modal", e => {
+        // Get cart content
+        _API.cart.get(data => {
+            if (!data.cart) {
+                console.log("Error!");
+            } else {
+                data.cart.forEach(item => {
+                    $(e.target)
+                        .find("ul")
+                        .append(`<li>${item.name} x ${item.amount}</li>`);
+
+                    $(e.target)
+                        .find(".price > span")
+                        .text(data.sum);
+                });
+                setRandomMessage("accept");
+                // Clear cart
+                _API.cart.clear();
+            }
+        });
+    });
+
+    // Modal after hidden
+    $("#dialog").on("hidden.bs.modal", e => {
+        $(e.target)
+            .find("ul")
+            .text("");
+        $(e.target)
+            .find(".price > span")
+            .text("");
+    });
+
+    const elements = [
+        {
+            selector: "#search",
+            event: "search",
+            handler: searchHandler
+        },
+        {
+            selector: ".search button",
+            event: "click",
+            handler: searchHandler
+        },
         {
             selector: ".quantity-add",
             event: "click",
-            handler: traderAddValue
+            handler: traderAddValueHandler
         },
         {
             selector: ".quantity-subtract",
             event: "click",
-            handler: traderSubtractValue
+            handler: traderSubtractValueHandler
         },
         {
             selector: ".btn-action",
@@ -235,14 +287,25 @@ $(document).ready(() => {
         {
             selector: ".cart-quantity-add",
             event: "click",
-            handler: cartAddValue
+            handler: cartAddValueHandler
         },
         {
             selector: ".cart-quantity-subtract",
             event: "click",
-            handler: cartSubtractValue
+            handler: cartSubtractValueHandler
+        },
+        {
+            selector: "#accept",
+            event: "click",
+            handler: acceptPurchaseHandler
+        },
+        {
+            selector: "#decline",
+            event: "click",
+            handler: declinePurchaseHandler
         }
     ];
 
     addListeners();
+    setRandomMessage("welcome");
 });
