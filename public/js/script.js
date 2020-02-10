@@ -202,7 +202,7 @@ $(document).ready(() => {
     function declinePurchaseHandler() {
         // Clear cart
         _API.cart.clear(data => {
-            if (data != 1) {
+            if (data == 0) {
                 alert("An error occured when declining the purchase");
             } else {
                 $("body")
@@ -293,8 +293,7 @@ $(document).ready(() => {
             .text("");
     });
 
-    const elements = [
-        {
+    const elements = [{
             selector: "#search",
             event: "search",
             handler: searchHandler
