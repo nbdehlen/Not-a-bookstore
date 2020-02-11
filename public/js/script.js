@@ -80,6 +80,7 @@ $(document).ready(() => {
             });
 
             updateSum();
+            getJoke();
         });
     }
 
@@ -243,6 +244,14 @@ $(document).ready(() => {
                 $(elt).on(item.event, item.handler);
             });
         });
+    }
+
+    function getJoke() {
+        return _API.joke.get((data) => {
+            $(".messagebox-message").text(data.joke);
+
+        });
+
     }
 
     // Modal on show

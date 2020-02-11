@@ -47,9 +47,14 @@ class Handler extends ExceptionHandler
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Exception
+     * 
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        $catModel = new \App\Httpcat;
+        $code = $exception->getStatusCode();
+        // $cat = $catModel->fetchCat($code);
+        return response()->view('error', ["code" => $code], $code);
+        // return parent::render($request, $exception);
     }
 }
