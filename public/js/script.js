@@ -246,11 +246,16 @@ $(document).ready(() => {
         });
     }
 
-    function getJoke() {
-        return _API.joke.get(data => {
-            $(".messagebox-message").text(data.joke);
-        });
-    }
+    // Get a random dad joke
+    let getJoke = _.debounce(
+        function() {
+            return _API.joke.get(data => {
+                $(".messagebox-message").text(data.joke);
+            });
+        },
+        1000,
+        true
+    );
 
     // Modal on show
     $("#dialog").on("show.bs.modal", e => {
