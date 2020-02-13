@@ -51,9 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $catModel = new \App\Httpcat;
         $code = $exception->getStatusCode();
-        // $cat = $catModel->fetchCat($code);
         return response()->view('error', ["code" => $code], $code);
         // return parent::render($request, $exception);
     }
