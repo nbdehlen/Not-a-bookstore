@@ -37,10 +37,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $amount)
+    public function show(Request $request)
     {
         $cart = new Cart();
-        $item = $cart->addToCart($id, $amount);
+        $item = $cart->addToCart($request->item_id, $request->amount);
 
         return view('cart_item', compact('item'));
     }
@@ -50,10 +50,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id, $amount)
+    public function update(Request $request, $id)
     {
         $cart = new Cart();
-        $cart->updateCart($id, $amount);
+        $cart->updateCart($id, $request->amount);
 
         return;
     }

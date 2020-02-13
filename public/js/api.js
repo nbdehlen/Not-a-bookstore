@@ -67,7 +67,11 @@ const _API = {
         addToCart(itemId, amount, callback = function() {}) {
             $.ajax({
                 type: "POST",
-                url: `/api/cart/${itemId}/${amount}`,
+                url: `/api/cart`,
+                data: {
+                    item_id: itemId,
+                    amount: amount
+                },
                 success: function(data) {
                     callback(data);
                 },
@@ -126,7 +130,10 @@ const _API = {
         update(itemId, amount, callback = function() {}) {
             $.ajax({
                 type: "PATCH",
-                url: `/api/cart/${itemId}/${amount}`,
+                url: `/api/cart/${itemId}`,
+                data: {
+                    amount: amount
+                },
                 success: function(data) {
                     callback(data);
                 },
