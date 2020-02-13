@@ -19,7 +19,7 @@ Route::get('item/{item_id}', 'ItemController@show');
 // Cart
 Route::get('cart/sum', 'CartController@sum');
 Route::get('cart', 'CartController@index');
-Route::get('item/{item_id}/{amount}', 'CartController@show');
+Route::post('cart/{item_id}/{amount}', 'CartController@show');
 Route::patch('cart/{item_id}/{amount}', 'CartController@update');
 Route::delete('cart/{item_id}', 'CartController@destroy');
 Route::delete('cart', 'CartController@clear');
