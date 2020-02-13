@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Items
-Route::get('item/{item_id}', 'ItemController@show');
+Route::get('items/{item_id}', 'ItemController@show');
+Route::post('items/search', 'ItemController@search');
 
 // Cart
 Route::get('cart/sum', 'CartController@sum');

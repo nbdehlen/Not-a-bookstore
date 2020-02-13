@@ -247,11 +247,9 @@ $(document).ready(() => {
     }
 
     function getJoke() {
-        return _API.joke.get((data) => {
+        return _API.joke.get(data => {
             $(".messagebox-message").text(data.joke);
-
         });
-
     }
 
     // Modal on show
@@ -302,7 +300,8 @@ $(document).ready(() => {
             .text("");
     });
 
-    const elements = [{
+    const elements = [
+        {
             selector: "#search",
             event: "search",
             handler: searchHandler

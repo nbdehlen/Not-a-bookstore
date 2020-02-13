@@ -17,4 +17,3 @@ Route::get('/', function () {
 });
 
 Route::get('/shop', 'ItemController@index');
-Route::get('/shop/search', 'ItemController@search');
