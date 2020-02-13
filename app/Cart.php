@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Item;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +17,12 @@ class Cart extends Model
      */
     public function addToCart($id, $amount)
     {
-        // Get item matching ID or throw error
-        $item = Item::where('item_id', $id)->firstOrFail();
+        try {
+            // Get item matching ID or throw error
+            $item = Item::where('item_id', $id)->firstOrFail();
+        } catch (Exception $exception) {
+            abort(404, "No item with ID matching $id was found");
+        }
         // Add amount to item object
         $item['amount'] = (int) $amount;
 
@@ -34,11 +39,12 @@ class Cart extends Model
             $order->amount = $item['amount'] + $inventory['amount'];
             $quantity -= $item['amount'];
         } else {
-            if ($quantity !== 0) {
-                // Set amount equal to quantity if a number greater than quantity was provided
-                $order->amount = $quantity;
-                $quantity = 0;
-            }
+            // if ($quantity !== 0) {
+            //     // Set amount equal to quantity if a number greater than quantity was provided
+            //     $order->amount = $quantity;
+            //     $quantity = 0;
+            // }
+            abort(500, 'Given amount exceeds vendor quantity');
         }
 
         $item['amount'] = $order->amount;
@@ -79,8 +85,6 @@ class Cart extends Model
                     $quantity += 1;
                 }
             } else {
-                // This part has an issue, gotta fix it!
-
                 if ($amount > $inventory['amount']) {
                     // Set cart amount equal to vendor item quantity plus cart amount from db
                     $order->amount = $inventory['quantity'] + $inventory['amount'];
