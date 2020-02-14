@@ -196,6 +196,7 @@ body {
 }
 
 .messagebox-image {
+  height: 125px;
   border-right: 1px solid #28241d;
 }
 

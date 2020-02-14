@@ -1,7 +1,7 @@
 const npcMessages = {
     welcome: [
         "Welcome, stranger. I have everything you require, right here.",
-        "Welcome, stranger"
+        "Welcome, stranger."
     ],
     accept: [
         "Thank you for your purchase.",

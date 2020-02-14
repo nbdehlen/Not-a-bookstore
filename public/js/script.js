@@ -80,6 +80,7 @@ $(document).ready(() => {
             });
 
             updateSum();
+            getJoke();
         });
     }
 
@@ -245,6 +246,17 @@ $(document).ready(() => {
         });
     }
 
+    // Get a random dad joke
+    let getJoke = _.debounce(
+        function() {
+            return _API.joke.get(data => {
+                $(".messagebox-message").text(data.joke);
+            });
+        },
+        1000,
+        true
+    );
+
     // Modal on show
     $("#dialog").on("show.bs.modal", e => {
         // Get cart content
@@ -293,7 +305,8 @@ $(document).ready(() => {
             .text("");
     });
 
-    const elements = [{
+    const elements = [
+        {
             selector: "#search",
             event: "search",
             handler: searchHandler

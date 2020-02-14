@@ -1,161 +1,114 @@
+function fetch(settings, callback = () => {}) {
+    $.ajax({
+        ...settings,
+        success: data => {
+            callback(data);
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            console.log(
+                "AJAX error: " + textStatus + " : " + errorThrown + " " + jqXHR
+            );
+        }
+    });
+}
+
 const _API = {
+    joke: {
+        get(callback) {
+            fetch(
+                {
+                    type: "GET",
+                    url: "https://icanhazdadjoke.com/",
+                    dataType: "json"
+                },
+                callback
+            );
+        }
+    },
     trader: {
-        search(value, callback = function() {}) {
-            $.ajax({
-                type: "GET",
-                url: "shop/search",
-                data: {
-                    search: value
+        search(value, callback) {
+            fetch(
+                {
+                    type: "POST",
+                    url: "/api/items/search",
+                    data: {
+                        search: value
+                    }
                 },
-                success: function(data) {
-                    callback(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        getItem(itemId, callback = function() {}) {
-            $.ajax({
-                type: "GET",
-                url: `/api/item/${itemId}`,
-                success: function(data) {
-                    callback(data);
+        getItem(itemId, callback) {
+            fetch(
+                {
+                    type: "GET",
+                    url: `/api/items/${itemId}`
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        addToCart(itemId, amount, callback = function() {}) {
-            $.ajax({
-                type: "GET",
-                url: `/api/item/${itemId}/${amount}`,
-                success: function(data) {
-                    callback(data);
+        addToCart(itemId, amount, callback) {
+            fetch(
+                {
+                    type: "POST",
+                    url: "/api/cart",
+                    data: {
+                        item_id: itemId,
+                        amount: amount
+                    }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         }
     },
     cart: {
-        get(callback = function() {}) {
-            $.ajax({
-                type: "GET",
-                url: "/api/cart",
-                success: function(data) {
-                    callback(data);
+        get(callback) {
+            fetch(
+                {
+                    type: "GET",
+                    url: "/api/cart"
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        sum(callback = function() {}) {
-            $.ajax({
-                type: "GET",
-                url: "/api/cart/sum",
-                success: function(data) {
-                    callback(data);
+        sum(callback) {
+            fetch(
+                {
+                    type: "GET",
+                    url: "/api/cart/sum"
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        update(itemId, amount, callback = function() {}) {
-            $.ajax({
-                type: "PATCH",
-                url: `/api/cart/${itemId}/${amount}`,
-                success: function(data) {
-                    callback(data);
+        update(itemId, amount, callback) {
+            fetch(
+                {
+                    type: "PATCH",
+                    url: `/api/cart/${itemId}`,
+                    data: {
+                        amount: amount
+                    }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        delete(itemId, callback = function() {}) {
-            $.ajax({
-                type: "DELETE",
-                url: `/api/cart/${itemId}`,
-                success: function(data) {
-                    callback(data);
+        delete(itemId, callback) {
+            fetch(
+                {
+                    type: "DELETE",
+                    url: `/api/cart/${itemId}`
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         },
-        clear(callback = function() {}) {
-            $.ajax({
-                type: "DELETE",
-                url: "/api/cart",
-                success: function(data) {
-                    callback(data);
+        clear(callback) {
+            fetch(
+                {
+                    type: "DELETE",
+                    url: `/api/cart`
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(
-                        "AJAX error: " +
-                            textStatus +
-                            " : " +
-                            errorThrown +
-                            " " +
-                            jqXHR
-                    );
-                }
-            });
+                callback
+            );
         }
     }
 };
