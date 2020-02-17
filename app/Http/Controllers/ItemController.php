@@ -14,7 +14,7 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // Get all items from cart
         $cart = new Cart();
@@ -24,13 +24,21 @@ class ItemController extends Controller
         // Get all items
         $items = Item::get();
 
+        if($request->wantsJson()) {
+            return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
+        }
+
         return view('shop', compact('items', 'cart', 'sum'));
     }
 
     // Get specific item
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $item = Item::where('item_id', $id)->firstOrFail();
+
+        if($request->wantsJson()) {
+            return response()->json($item, 200); //, array(), JSON_PRETTY_PRINT);
+        }
 
         return view('npc_item', compact('item'));
     }
@@ -42,9 +50,10 @@ class ItemController extends Controller
         $items = new Item();
         $search = $items->search($request->search);
 
-        // if request is type ajax and $items is defined
-        if ($request->ajax() && $search) {
-            return view('npc_items', ['items' => $search]);
+        if ($request->wantsJson()) {
+            return response()->json($search, 200, array()); //, JSON_PRETTY_PRINT);
         }
+
+        return view('npc_items', ['items' => $search]);
     }
 }
