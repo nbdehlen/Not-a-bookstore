@@ -37,7 +37,7 @@ class ItemController extends Controller
         $item = Item::where('item_id', $id)->firstOrFail();
 
         if($request->wantsJson()) {
-            return response()->json($item, 200); //, array(), JSON_PRETTY_PRINT);
+            return response()->json($item, 200, array(), JSON_PRETTY_PRINT);
         }
 
         return view('npc_item', compact('item'));
@@ -51,7 +51,7 @@ class ItemController extends Controller
         $search = $items->search($request->search);
 
         if ($request->wantsJson()) {
-            return response()->json($search, 200, array()); //, JSON_PRETTY_PRINT);
+            return response()->json($search, 200, array(), JSON_PRETTY_PRINT);
         }
 
         return view('npc_items', ['items' => $search]);
