@@ -16,17 +16,17 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
+        // Get all items
+        $items = Item::get();
+
+        if ($request->route()->getPrefix() === 'api' ) {
+            return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
+        }
+
         // Get all items from cart
         $cart = new Cart();
         $sum = $cart->getSum();
         $cart = $cart->getAllItems();
-
-        // Get all items
-        $items = Item::get();
-
-        if($request->wantsJson()) {
-            return response()->json($items, 200, array(), JSON_PRETTY_PRINT);
-        }
 
         return view('shop', compact('items', 'cart', 'sum'));
     }
