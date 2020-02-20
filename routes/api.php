@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Items
+Route::get('items', 'ItemController@index');
 Route::get('items/{item_id}', 'ItemController@show');
 Route::post('items/search', 'ItemController@search');
 
